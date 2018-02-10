@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Prestener.activity.SchoolJobActivity"/>
+        <activity android:name=".Prestener.activity.SearchJobActivity"/>
+        <activity android:name=".Prestener.activity.LoginActivity"/>
+        <activity android:name=".Prestener.activity.RegisterActivity"/>
+        <activity android:name=".Prestener.activity.RegisterPhoneActivity"/>
+        <activity android:name=".Prestener.activity.FillInfoActivity"/>
+        <activity android:name=".Prestener.activity.UserResumeActivity"/>
+        <activity android:name=".Prestener.activity.IntroduceJobActivity"/>
+        <activity android:name=".Prestener.activity.IntroduceCoActivity"/>
+        <activity android:name=".Prestener.activity.FindPwdActivity"/>
+        <activity android:name=".Prestener.activity.DescribeDetailsActivity"/>
+        <activity android:name=".Prestener.activity.SearchHistoryActivity"/>
     </application>
 
 </manifest>

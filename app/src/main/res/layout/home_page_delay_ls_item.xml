@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:background="@mipmap/groweup"
+        >
+
+        <RelativeLayout
+            android:padding="@dimen/space_15"
+            android:layout_above="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_centerVertical="true"
+                android:scaleType="fitXY"
+                android:id="@+id/iv_icon"
+                android:src="@mipmap/youyuzhanweicopy2"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/iv_icon"
+                android:layout_marginLeft="@dimen/space_30"
+                >
+                <TextView
+                    android:id="@+id/tv_co"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="鱿鱼金融"
+                    android:textSize="@dimen/text_size_17"
+                    android:textColor="@color/text_black"
+                    />
+
+                <TextView
+                    android:textColor="@color/text_gray"
+                    android:layout_marginTop="@dimen/space_5"
+                    android:textSize="@dimen/text_size_13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_intro"
+                    android:text="爱神的箭奥斯卡的湿哒哒爱神的箭按实际但是"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <View
+                android:layout_marginRight="@dimen/space_10"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_divider_1"
+                android:background="@color/text_gray"/>
+
+            <TextView
+                android:id="@+id/tv_product"
+                android:layout_marginLeft="@dimen/space_20"
+                android:drawablePadding="@dimen/space_5"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="移动互联网金融"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/space_10"
+                android:drawableLeft="@mipmap/qiyexiangzhicopy2"
+                />
+
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_toRightOf="@+id/tv_product"
+                android:layout_marginLeft="@dimen/space_25"
+                android:drawablePadding="@dimen/space_5"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="移动互联网金融"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/space_10"
+                android:drawableLeft="@mipmap/renshuguomocopy2"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/tv_num"
+                android:layout_marginLeft="@dimen/space_25"
+                android:drawablePadding="@dimen/space_5"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上海"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/space_10"
+                android:drawableLeft="@mipmap/dizhicopy2"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_8"/>
+
+</LinearLayout>

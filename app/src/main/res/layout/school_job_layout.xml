@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bg_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/header_layout"/>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+                <com.jude.rollviewpager.RollPagerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/roll_view"
+                    >
+                </com.jude.rollviewpager.RollPagerView>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:background="@color/text_white"
+                android:layout_width="match_parent"
+                android:layout_height="85dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:drawableTop="@mipmap/yingjiesheng"
+                    style="@style/text_style"
+                    android:text="应届生专区"
+                    />
+                <TextView
+                    android:drawableTop="@mipmap/shixisheng"
+                    android:text="实习生专区"
+                    style="@style/text_style"
+                    />
+                <TextView
+                    android:drawableTop="@mipmap/jianzhizhuanqu"
+                    android:text="兼职专区"
+                    style="@style/text_style"
+                    />
+                <TextView
+                    android:drawableTop="@mipmap/xuanjianghui"
+                    android:text="最新宣讲会"
+                    style="@style/text_style"
+                    />
+                <TextView
+                    android:drawableTop="@mipmap/qiuzhizixun"
+                    android:text="求职咨询"
+                    style="@style/text_style"
+                    />
+
+            </LinearLayout>
+
+
+            <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                android:layout_marginTop="@dimen/space_10"
+                android:divider="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="@dimen/space_10"
+                android:id="@+id/ls"
+                ></com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

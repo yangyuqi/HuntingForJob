@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_header"
     android:layout_width="match_parent"
-    android:layout_height="45dip"
-    android:background="@color/bg_main">
+    android:layout_height="50dip"
+    android:background="@drawable/main_color">
 
     <!-- 返回按钮 -->
 
@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/space_15"
         android:clickable="true"
+        android:src="@mipmap/fanhui"
         />
 
     <TextView

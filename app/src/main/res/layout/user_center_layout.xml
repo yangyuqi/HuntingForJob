@@ -26,6 +26,7 @@
             />
 
         <RelativeLayout
+            android:id="@+id/rl_user"
             android:layout_marginLeft="@dimen/space_20"
             android:layout_centerVertical="true"
             android:layout_width="match_parent"
@@ -84,7 +85,7 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:background="@mipmap/beijing"
+            android:background="@mipmap/groweup"
             android:layout_width="match_parent"
             android:layout_height="68dp">
 
@@ -167,7 +168,7 @@
         </LinearLayout>
         
         <LinearLayout
-            android:background="@mipmap/beijing"
+            android:background="@mipmap/groweup"
             android:layout_width="match_parent"
             android:layout_height="145dp"
             android:layout_marginTop="8dp"
@@ -263,7 +264,7 @@
 
 
         <LinearLayout
-            android:background="@mipmap/beijing"
+            android:background="@mipmap/groweup"
             android:layout_width="match_parent"
             android:layout_height="95dp"
             android:layout_marginTop="8dp"
