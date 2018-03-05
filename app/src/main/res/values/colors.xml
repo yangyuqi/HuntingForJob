@@ -15,4 +15,5 @@
     <color name="category_item">#CBD8EF</color>
     <color name="text_normal_gray">#333333</color>
     <color name="category_item_color">#E6E6E6</color>
+    <color name="bg_origin">#F4A523</color>
 </resources>

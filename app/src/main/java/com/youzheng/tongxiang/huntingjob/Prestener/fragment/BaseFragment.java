@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.youzheng.tongxiang.huntingjob.Model.IBasePresenter;
+import com.youzheng.tongxiang.huntingjob.UI.Utils.SharedPreferencesUtils;
 import com.youzheng.tongxiang.huntingjob.View.IBaseView;
 
 import javax.inject.Inject;
@@ -18,13 +20,28 @@ import javax.inject.Inject;
 public class BaseFragment<T extends IBasePresenter> extends Fragment implements IBaseView {
 
     protected Context mContext;
+    protected Gson gson ;
 
     protected T mPresenter ;
+
+    protected String accessToken ;
+    protected int rid ;
+    protected int uid ;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+        gson = new Gson();
+        accessToken = (String) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.access_token,"");
+        rid = (int) SharedPreferencesUtils.getParam(mContext, SharedPreferencesUtils.rid, 0);
+        uid = (int) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.uid,0);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        accessToken = (String) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.access_token,"");
     }
 
     @Override

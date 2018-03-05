@@ -7,8 +7,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.youzheng.tongxiang.huntingjob.Model.IBasePresenter;
+import com.youzheng.tongxiang.huntingjob.UI.Utils.SharedPreferencesUtils;
 import com.youzheng.tongxiang.huntingjob.View.IBaseView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 
@@ -20,15 +25,27 @@ public  class BaseActivity<T extends IBasePresenter> extends AppCompatActivity i
 
     protected Context mContext ;
     protected FragmentManager fm;
+    protected Gson gson ;
+    protected String accessToken ;
+    protected int uid ,rid ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fm = getSupportFragmentManager();
         mContext = this ;
+        gson = new Gson();
+        accessToken = (String) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.access_token,"");
+        uid = (int) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.uid,0);
+        rid = (int) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.rid,0);
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        accessToken = (String) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.access_token,"");
+    }
 
     @Override
     public void showLoading() {

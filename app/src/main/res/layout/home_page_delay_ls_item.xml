@@ -36,14 +36,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="鱿鱼金融"
-                    android:textSize="@dimen/text_size_17"
+                    android:textSize="@dimen/text_size_15"
                     android:textColor="@color/text_black"
                     />
 
                 <TextView
                     android:textColor="@color/text_gray"
                     android:layout_marginTop="@dimen/space_5"
-                    android:textSize="@dimen/text_size_13"
+                    android:textSize="@dimen/text_size_11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_intro"
@@ -68,6 +68,7 @@
                 android:background="@color/text_gray"/>
 
             <TextView
+                android:singleLine="true"
                 android:id="@+id/tv_product"
                 android:layout_marginLeft="@dimen/space_20"
                 android:drawablePadding="@dimen/space_5"
@@ -81,6 +82,7 @@
                 />
 
             <TextView
+                android:singleLine="true"
                 android:id="@+id/tv_num"
                 android:layout_toRightOf="@+id/tv_product"
                 android:layout_marginLeft="@dimen/space_25"
@@ -95,6 +97,8 @@
                 />
 
             <TextView
+                android:singleLine="true"
+                android:id="@+id/tv_pace"
                 android:layout_toRightOf="@+id/tv_num"
                 android:layout_marginLeft="@dimen/space_25"
                 android:drawablePadding="@dimen/space_5"

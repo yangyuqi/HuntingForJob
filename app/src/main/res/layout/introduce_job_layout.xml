@@ -30,6 +30,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="UI设计师"
@@ -41,6 +42,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_money"
                 android:paddingTop="@dimen/space_8"
                 android:paddingBottom="@dimen/space_8"
                 android:text="20K-50K"
@@ -62,6 +64,7 @@
             android:orientation="horizontal"
             >
             <TextView
+                android:id="@+id/tv_place"
                 android:drawablePadding="@dimen/space_2"
                 android:drawableLeft="@mipmap/zuobiaoo"
                 android:layout_width="wrap_content"
@@ -71,6 +74,7 @@
                 android:textSize="@dimen/text_size_11"
                 />
             <TextView
+                android:id="@+id/tv_class"
                 android:layout_marginLeft="@dimen/space_8"
                 android:drawablePadding="@dimen/space_2"
                 android:drawableLeft="@mipmap/xueli"
@@ -81,6 +85,7 @@
                 android:textSize="@dimen/text_size_11"
                 />
             <TextView
+                android:id="@+id/tv_work_style"
                 android:layout_marginLeft="@dimen/space_8"
                 android:drawablePadding="@dimen/space_2"
                 android:drawableLeft="@mipmap/quanzhi"
@@ -91,6 +96,7 @@
                 android:textSize="@dimen/text_size_11"
                 />
             <TextView
+                android:id="@+id/tv_experice"
                 android:layout_marginLeft="@dimen/space_8"
                 android:drawablePadding="@dimen/space_2"
                 android:drawableLeft="@mipmap/gongzuojingyan2"
@@ -102,6 +108,7 @@
                 />
 
             <TextView
+                android:id="@+id/tv_year"
                 android:layout_marginLeft="@dimen/space_8"
                 android:drawablePadding="@dimen/space_2"
                 android:drawableLeft="@mipmap/ruogancopy"
@@ -149,6 +156,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_co_name"
                     android:layout_gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -178,6 +186,7 @@
                 >
 
                 <TextView
+                    android:id="@+id/tv_co_type"
                     android:drawablePadding="@dimen/space_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,6 +196,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_num"
                     android:drawablePadding="@dimen/space_2"
                     android:layout_marginLeft="@dimen/space_10"
                     android:layout_width="wrap_content"
@@ -209,6 +219,7 @@
                 >
 
                 <TextView
+                    android:id="@+id/tv_ctype"
                     android:drawablePadding="@dimen/space_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -318,22 +329,40 @@
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1"
-                android:gravity="center"
                 >
 
-                <TextView
-                    android:textSize="@dimen/text_size_15"
-                    android:drawablePadding="@dimen/space_5"
+                <LinearLayout
+                    android:id="@+id/ll_click_shoucan"
+                    android:layout_centerInParent="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="收藏"
-                    android:drawableLeft="@mipmap/shoucang"
-                    android:textColor="@color/text_red"
-                    />
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_shoucan"
+                        android:src="@mipmap/shoucang3"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/space_5"
+                        android:textSize="@dimen/text_size_15"
+                        android:drawablePadding="@dimen/space_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="收藏"
+                        android:textColor="@color/text_red"
+                        />
+
+                </LinearLayout>
+
 
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_deliver_msg"
                 android:layout_marginRight="@dimen/space_15"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/toujian_li_bg"

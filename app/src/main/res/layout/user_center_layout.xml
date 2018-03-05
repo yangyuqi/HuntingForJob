@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:overScrollMode="never"
+    android:scrollbars="none"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,6 +59,7 @@
                 >
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="刘诗诗"
@@ -90,75 +99,75 @@
             android:layout_height="68dp">
 
             <LinearLayout
+                android:id="@+id/rl_user_info"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:textSize="@dimen/text_size_20"
+                <ImageView
+                    android:src="@mipmap/gerenxinxi1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textColor="@color/text_black"
                     />
 
                 <TextView
+                    android:layout_marginTop="@dimen/space_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="待面试"
-                    android:textColor="@color/text_gray"
+                    android:text="个人信息"
+                    android:textColor="@color/text_normal_gray"
                     android:textSize="@dimen/text_size_13"
                     />
 
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/rl_deliver"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:textSize="@dimen/text_size_20"
+                <ImageView
+                    android:src="@mipmap/toudixiang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textColor="@color/text_black"
                     />
 
                 <TextView
+                    android:layout_marginTop="@dimen/space_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="已投递"
-                    android:textColor="@color/text_gray"
+                    android:text="投递箱"
+                    android:textColor="@color/text_normal_gray"
                     android:textSize="@dimen/text_size_13"
                     />
 
 
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/rl_invite"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:textSize="@dimen/text_size_20"
+                <ImageView
+                    android:src="@mipmap/yaoqinghan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textColor="@color/text_black"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="关注公司"
-                    android:textColor="@color/text_gray"
+                    android:text="邀请函"
+                    android:layout_marginTop="@dimen/space_3"
+                    android:textColor="@color/text_normal_gray"
                     android:textSize="@dimen/text_size_13"
                     />
 
@@ -170,12 +179,13 @@
         <LinearLayout
             android:background="@mipmap/groweup"
             android:layout_width="match_parent"
-            android:layout_height="145dp"
+            android:layout_height="193dp"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             >
 
             <RelativeLayout
+                android:id="@+id/rl_bang_phone"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 >
@@ -185,8 +195,10 @@
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="职位收藏"
-                    android:drawableLeft="@mipmap/zhiweishoucang"
+                    android:text="账号绑定"
+                    android:textColor="@color/text_normal_gray"
+                    android:textSize="@dimen/text_size_14"
+                    android:drawableLeft="@mipmap/zhanghaobangding"
                     />
 
                 <ImageView
@@ -206,17 +218,20 @@
                 android:layout_height="@dimen/space_divider_1"
                 android:background="@color/text_gray"/>
             <RelativeLayout
+                android:id="@+id/rl_secret"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 >
                 <TextView
+                    android:textColor="@color/text_normal_gray"
+                    android:textSize="@dimen/text_size_14"
                     android:layout_marginLeft="@dimen/space_20"
                     android:drawablePadding="@dimen/space_20"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="我的黑名单"
-                    android:drawableLeft="@mipmap/wodeheimingdan"
+                    android:text="隐私设置"
+                    android:drawableLeft="@mipmap/yinsi"
                     />
 
                 <ImageView
@@ -236,17 +251,53 @@
                 android:layout_height="@dimen/space_divider_1"
                 android:background="@color/text_gray"/>
             <RelativeLayout
+                android:id="@+id/rl_speak"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 >
                 <TextView
+                    android:textSize="@dimen/text_size_14"
+                    android:textColor="@color/text_normal_gray"
                     android:layout_marginLeft="@dimen/space_20"
                     android:drawablePadding="@dimen/space_20"
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="家的位置"
-                    android:drawableLeft="@mipmap/jiadeweizhi"
+                    android:text="我参加的宣讲会"
+                    android:drawableLeft="@mipmap/xuanjianghui1"
+                    />
+
+                <ImageView
+                    android:layout_marginRight="@dimen/space_15"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/jiantouyou"
+                    />
+
+            </RelativeLayout>
+            <View
+                android:layout_marginRight="@dimen/space_18"
+                android:layout_marginLeft="@dimen/space_25"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_divider_1"
+                android:background="@color/text_gray"/>
+            <RelativeLayout
+                android:id="@+id/rl_collect"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                >
+                <TextView
+                    android:textSize="@dimen/text_size_14"
+                    android:textColor="@color/text_normal_gray"
+                    android:layout_marginLeft="@dimen/space_20"
+                    android:drawablePadding="@dimen/space_20"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="收藏夹"
+                    android:drawableLeft="@mipmap/shoucang1"
                     />
 
                 <ImageView
@@ -266,23 +317,26 @@
         <LinearLayout
             android:background="@mipmap/groweup"
             android:layout_width="match_parent"
-            android:layout_height="95dp"
+            android:layout_height="100dp"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             >
 
             <RelativeLayout
+                android:id="@+id/rl_help"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:paddingBottom="@dimen/space_5"
                 android:paddingTop="@dimen/space_5">
 
                 <TextView
+                    android:textSize="@dimen/text_size_14"
+                    android:textColor="@color/text_normal_gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/space_20"
-                    android:drawableLeft="@mipmap/bangzhu"
+                    android:drawableLeft="@mipmap/bangzhuyufankui"
                     android:drawablePadding="@dimen/space_20"
                     android:text="帮助与反馈" />
 
@@ -304,12 +358,15 @@
                 android:background="@color/text_gray"/>
 
             <RelativeLayout
+                android:id="@+id/rl_set"
                 android:paddingBottom="@dimen/space_5"
                 android:paddingTop="@dimen/space_5"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 >
                 <TextView
+                    android:textSize="@dimen/text_size_14"
+                    android:textColor="@color/text_normal_gray"
                     android:layout_marginLeft="@dimen/space_20"
                     android:drawablePadding="@dimen/space_20"
                     android:layout_centerVertical="true"
@@ -334,5 +391,6 @@
 
     </LinearLayout>
 
-    
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

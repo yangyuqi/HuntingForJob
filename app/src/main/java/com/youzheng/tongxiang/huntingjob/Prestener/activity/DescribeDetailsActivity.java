@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.youzheng.tongxiang.huntingjob.Model.Event.EventModel;
+import com.youzheng.tongxiang.huntingjob.Model.Event.SelectJianLiBean;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.resume.UserResumeFivePageFragment;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.resume.UserResumeFourPageFragment;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.resume.UserResumeOnePageFragment;
@@ -28,12 +29,15 @@ import butterknife.ButterKnife;
  */
 
 public class DescribeDetailsActivity extends BaseActivity {
-    @BindView(R.id.btnBack)
-    ImageView btnBack;
+//    @BindView(R.id.btnBack)
+//    ImageView btnBack;
     @BindView(R.id.rl_content)
     FrameLayout rlContent;
-    @BindView(R.id.textHeadTitle)
-    TextView textHeadTitle;
+//    @BindView(R.id.textHeadTitle)
+//    TextView textHeadTitle;
+//    @BindView(R.id.textHeadNext)
+//    TextView textHeadNext;
+    private String type ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,14 +49,16 @@ public class DescribeDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
-        textHeadTitle.setVisibility(View.GONE);
-        btnBack.setVisibility(View.VISIBLE);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+//        textHeadTitle.setVisibility(View.GONE);
+//        btnBack.setVisibility(View.VISIBLE);
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
+//        textHeadNext.setText("完成");
+//        textHeadNext.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -65,24 +71,30 @@ public class DescribeDetailsActivity extends BaseActivity {
     public void onEvent(EventModel model) {
         FragmentTransaction transaction = fm.beginTransaction();
         switch (model) {
-            case GO_BASE_INFO:
-                transaction.replace(R.id.rl_content, new UserResumeOnePageFragment()).commit();
-                break;
-            case GO_WORK_INFO:
-                transaction.replace(R.id.rl_content, new UserResumeTwoPageFragment()).commit();
-                break;
-            case GO_JY_INFO:
-                transaction.replace(R.id.rl_content, new UserResumeFourPageFragment()).commit();
-                break;
-            case GO_STUDY_INFO:
-                transaction.replace(R.id.rl_content, new UserResumeThreePageFragment()).commit();
-                break;
-            case GO_JINENG_INFO:
-                transaction.replace(R.id.rl_content, new UserResumeFivePageFragment()).commit();
-                break;
             case GO_PINGJIA_INFO:
                 transaction.replace(R.id.rl_content, new UserResumeSixPageFragment()).commit();
                 break;
         }
     }
+
+    @Subscribe
+    public void onEvent(SelectJianLiBean liBean) {
+        FragmentTransaction transaction = fm.beginTransaction();
+        if (liBean.getType().equals("1")) {
+            transaction.replace(R.id.rl_content, UserResumeOnePageFragment.getInstance(liBean)).commit();
+        }else if (liBean.getType().equals("2")){
+            transaction.replace(R.id.rl_content,UserResumeTwoPageFragment.getInstance(liBean)).commit();
+        }else if (liBean.getType().equals("3")){
+            transaction.replace(R.id.rl_content,UserResumeFourPageFragment.getInstance(liBean)).commit();
+        }else if (liBean.getType().equals("4")){
+            transaction.replace(R.id.rl_content,UserResumeThreePageFragment.getInstance(liBean)).commit();
+        }else if (liBean.getType().equals("5")){
+            transaction.replace(R.id.rl_content,new UserResumeFivePageFragment()).commit();
+        }else if (liBean.getType().equals("6")){
+            transaction.replace(R.id.rl_content,UserResumeSixPageFragment.getInstance(liBean)).commit();
+        }
+    }
+
+
+
 }

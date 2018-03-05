@@ -12,5 +12,6 @@ public enum  EventModel {
     GO_STUDY_INFO,
     GO_JINENG_INFO,
     GO_PINGJIA_INFO,
-    CLOSE_TITLE
+    CLOSE_TITLE,
+    CLOSE_MAIN_ACTIVITY
 }

@@ -3,7 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/header_layout"/>
+
     <ScrollView
+        android:layout_margin="@dimen/space_15"
+        android:background="@mipmap/beijing"
+        android:scrollbars="none"
         android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,6 +42,11 @@
                 android:src="@mipmap/xian"
                 />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                ></LinearLayout>
 
             <RelativeLayout
                 android:layout_marginTop="@dimen/space_10"
@@ -60,22 +70,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <EditText
+                        android:background="@null"
                         android:id="@+id/tv_city"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
                         android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        />
-
-                    <ImageView
-                        android:padding="@dimen/space_15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@mipmap/sanjiao"
                         />
 
                 </RelativeLayout>
@@ -114,6 +116,7 @@
                         />
 
                     <ImageView
+                        android:id="@+id/iv_iocn"
                         android:padding="@dimen/space_15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -126,7 +129,15 @@
 
             </RelativeLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                ></LinearLayout>
+
             <TextView
+                android:id="@+id/tv_add"
                 android:layout_marginLeft="@dimen/space_20"
                 android:layout_marginTop="@dimen/space_10"
                 android:drawablePadding="@dimen/space_5"
@@ -136,8 +147,6 @@
                 android:textSize="@dimen/text_size_11"
                 android:drawableLeft="@mipmap/tianjia_copy_5"
                 />
-
-
 
             </LinearLayout>
 

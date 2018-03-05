@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.youzheng.tongxiang.huntingjob.Prestener.fragment.Login.UserInfoOnePag
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.Login.UserInfoTwoPageFragment;
 import com.youzheng.tongxiang.huntingjob.R;
 import com.youzheng.tongxiang.huntingjob.UI.Adapter.UserInfoFragmentPagerAdapter;
+import com.youzheng.tongxiang.huntingjob.UI.Widget.ViewPagerSlide;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,7 +37,7 @@ public class FillInfoActivity extends BaseActivity {
     @BindView(R.id.textHeadTitle)
     TextView textHeadTitle;
     @BindView(R.id.vp_layout)
-    ViewPager vpLayout;
+    ViewPagerSlide vpLayout;
     @BindView(R.id.view_two)
     ImageView viewTwo;
     @BindView(R.id.ll)
@@ -49,6 +51,7 @@ public class FillInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.fill_info_layout);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
@@ -64,7 +67,7 @@ public class FillInfoActivity extends BaseActivity {
     @Subscribe
     public void OnEvent(EventModel model){
         if (model==EventModel.GO_UPPER_PAGE){
-
+            vpLayout.setCurrentItem(1);
         }
     }
 
@@ -74,7 +77,11 @@ public class FillInfoActivity extends BaseActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                if (vpLayout.getCurrentItem()==1){
+                    vpLayout.setCurrentItem(0);
+                }else {
+                    finish();
+                }
             }
         });
         list.add(new UserInfoOnePageFragment());

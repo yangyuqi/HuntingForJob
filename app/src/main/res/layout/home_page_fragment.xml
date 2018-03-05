@@ -151,6 +151,7 @@
                     android:layout_height="match_parent"
                     >
                     <RelativeLayout
+                        android:id="@+id/rl_click"
                         android:layout_marginTop="@dimen/space_5"
                         android:paddingLeft="@dimen/space_5"
                         android:layout_weight="1"
@@ -168,42 +169,42 @@
                             android:layout_height="match_parent">
 
                             <RelativeLayout
-                                android:layout_gravity="center_vertical"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="1"
-                                >
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1">
+
                                 <TextView
-                                    android:layout_marginLeft="@dimen/space_3"
                                     android:id="@+id/tv_home_name"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="@dimen/text_size_13"
+                                    android:layout_marginLeft="@dimen/space_3"
                                     android:text="软件测试工程师"
                                     android:textColor="@color/text_main_gray"
-                                    />
+                                    android:textSize="@dimen/text_size_13" />
 
                                 <TextView
-                                    android:layout_marginRight="@dimen/space_10"
-                                    android:textColor="@color/text_red"
+                                    android:id="@+id/tv_money"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
+                                    android:layout_marginRight="@dimen/space_10"
                                     android:text="2K--4K"
-                                    />
+                                    android:textColor="@color/text_red" />
 
                                 <TextView
-                                    android:layout_marginLeft="@dimen/space_3"
-                                    android:textSize="@dimen/text_size_10"
-                                    android:textColor="@color/text_gray"
-                                    android:text="本科/上海"
+                                    android:id="@+id/tv_mm"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@+id/tv_home_name"
+                                    android:layout_marginLeft="@dimen/space_3"
                                     android:layout_marginTop="@dimen/space_8"
-                                    />
+                                    android:text="本科/上海"
+                                    android:textColor="@color/text_gray"
+                                    android:textSize="@dimen/text_size_10" />
 
                             </RelativeLayout>
+
                             <View
                                 android:layout_marginTop="@dimen/space_10"
                                 android:layout_marginRight="@dimen/space_30"
@@ -218,6 +219,7 @@
                                 android:layout_weight="1"
                                 >
                                 <TextView
+                                    android:singleLine="true"
                                     android:layout_marginLeft="@dimen/space_3"
                                     android:id="@+id/tv_home_name_co"
                                     android:layout_width="wrap_content"
@@ -229,6 +231,7 @@
 
 
                                 <TextView
+                                    android:id="@+id/tv_below"
                                     android:layout_marginLeft="@dimen/space_3"
                                     android:textSize="@dimen/text_size_11"
                                     android:textColor="@color/text_gray"
@@ -247,6 +250,7 @@
 
                     </RelativeLayout>
                     <RelativeLayout
+                        android:id="@+id/rl_rl_click"
                         android:paddingLeft="@dimen/space_5"
                         android:layout_marginTop="@dimen/space_8"
                         android:layout_weight="1"
@@ -280,6 +284,7 @@
                                     />
 
                                 <TextView
+                                    android:id="@+id/tv_tv_money"
                                     android:layout_marginRight="@dimen/space_10"
                                     android:textColor="@color/text_red"
                                     android:layout_width="wrap_content"
@@ -289,15 +294,15 @@
                                     />
 
                                 <TextView
-                                    android:layout_marginLeft="@dimen/space_3"
+                                    android:id="@+id/tv_mmm"
+                                    android:layout_below="@+id/tv_name"
+                                    android:layout_marginTop="@dimen/space_8"
                                     android:textSize="@dimen/text_size_10"
                                     android:textColor="@color/text_gray"
                                     android:text="本科/上海"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@+id/tv_name"
-                                    android:layout_marginTop="@dimen/space_8"
-                                    />
+                                    android:layout_marginLeft="@dimen/space_3" />
 
                             </RelativeLayout>
                             <View
@@ -314,6 +319,7 @@
                                 android:layout_weight="1"
                                 >
                                 <TextView
+                                    android:singleLine="true"
                                     android:layout_marginLeft="@dimen/space_3"
                                     android:id="@+id/tv_name_co"
                                     android:layout_width="wrap_content"
@@ -325,6 +331,7 @@
 
 
                                 <TextView
+                                    android:id="@+id/tv_below_below"
                                     android:layout_marginLeft="@dimen/space_3"
                                     android:textSize="@dimen/text_size_10"
                                     android:textColor="@color/text_gray"
@@ -388,14 +395,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/space_divider_2"
                         android:background="@color/text_red"/>
-                    
+
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_marginTop="@dimen/space_15"
                         android:layout_below="@+id/tv_more2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        
+
                         <RelativeLayout
                             android:background="@mipmap/groweup"
                             android:layout_marginRight="@dimen/space_15"
@@ -405,6 +412,7 @@
                             android:layout_height="0dp">
 
                             <ImageView
+                                android:id="@+id/iv_icon1"
                                 android:src="@mipmap/logo05"
                                 android:scaleType="fitXY"
                                 android:layout_width="44dp"
@@ -422,6 +430,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp">
                             <ImageView
+                                android:id="@+id/iv_icon2"
                                 android:src="@mipmap/logo05"
                                 android:scaleType="fitXY"
                                 android:layout_width="44dp"
@@ -438,6 +447,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp">
                             <ImageView
+                                android:id="@+id/iv_icon13"
                                 android:src="@mipmap/logo05"
                                 android:scaleType="fitXY"
                                 android:layout_width="44dp"
@@ -445,7 +455,7 @@
                                 android:layout_centerInParent="true"
                                 />
                         </RelativeLayout>
-                        
+
                     </LinearLayout>
 
 

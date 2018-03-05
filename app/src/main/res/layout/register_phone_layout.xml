@@ -32,13 +32,15 @@
             android:background="@drawable/login_bg_rl">
 
             <EditText
+                android:maxLength="11"
+                android:inputType="number"
                 android:id="@+id/tv_phone"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/space_10"
                 android:background="@null"
-                android:cursorVisible="false"
+                android:cursorVisible="true"
                 android:drawableLeft="@mipmap/shoujizhanghao"
                 android:drawablePadding="@dimen/space_20"
                 android:hint="手机号"
@@ -60,13 +62,14 @@
             android:background="@drawable/login_bg_rl">
 
             <EditText
+                android:inputType="textPassword"
                 android:id="@+id/tv_pwd"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/space_10"
                 android:background="@null"
-                android:cursorVisible="false"
+                android:cursorVisible="true"
                 android:drawableLeft="@mipmap/mima"
                 android:drawablePadding="@dimen/space_20"
                 android:hint="请输入密码"
@@ -99,13 +102,14 @@
                 android:layout_alignParentRight="true"/>
 
             <EditText
+                android:maxLength="6"
                 android:id="@+id/tv_code"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/space_10"
                 android:background="@null"
-                android:cursorVisible="false"
+                android:cursorVisible="true"
                 android:drawableLeft="@mipmap/yanzhengma"
                 android:drawablePadding="@dimen/space_20"
                 android:hint="验证码"

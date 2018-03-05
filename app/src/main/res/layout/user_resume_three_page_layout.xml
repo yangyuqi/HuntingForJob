@@ -3,7 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/header_layout"/>
+
     <ScrollView
+        android:scrollbars="none"
+        android:layout_margin="@dimen/space_12"
+        android:background="@mipmap/beijing"
         android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -72,9 +77,10 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:paddingLeft="@dimen/space_10"
-                            android:textSize="@dimen/text_size_13" />
+                            android:textSize="@dimen/text_size_10" />
 
                         <ImageView
+                            android:id="@+id/iv_rili1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -104,9 +110,10 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:paddingLeft="@dimen/space_10"
-                            android:textSize="@dimen/text_size_13" />
+                            android:textSize="@dimen/text_size_10" />
 
                         <ImageView
+                            android:id="@+id/iv_rili2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -143,6 +150,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
+                        android:id="@+id/edt_school"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
                         android:layout_centerVertical="true"
@@ -188,6 +196,7 @@
                         />
 
                     <ImageView
+                        android:id="@+id/iv_level"
                         android:padding="@dimen/space_15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -223,23 +232,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <EditText
+                        android:background="@null"
                         android:id="@+id/tv_study_work"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
                         android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
 
-                    <ImageView
-                        android:padding="@dimen/space_15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:src="@mipmap/sanjiao"
-                        />
 
                 </RelativeLayout>
 
@@ -266,7 +268,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <CheckBox
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        >
+
+                    <RadioButton
                         android:textColor="@drawable/chose_female_text_bg"
                         android:checked="true"
                         android:background="@drawable/chose_female_bg"
@@ -277,7 +285,7 @@
                         android:layout_width="73dp"
                         android:layout_height="match_parent" />
 
-                    <CheckBox
+                    <RadioButton
                         android:background="@drawable/chose_female_bg"
                         android:textColor="@drawable/chose_female_text_bg"
                         android:layout_marginLeft="35dp"
@@ -288,7 +296,7 @@
                         android:button="@null"
                         android:layout_width="73dp"
                         android:layout_height="match_parent" />
-
+                    </RadioGroup>
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -316,13 +324,13 @@
                     android:layout_height="250dp">
 
                     <EditText
+                        android:id="@+id/edt_miaoshu"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
-                        android:layout_centerVertical="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint=""
+                        android:hint="填写专业描述"
                         />
 
                 </RelativeLayout>

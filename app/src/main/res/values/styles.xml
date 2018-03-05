@@ -9,6 +9,8 @@
     </style>
 
 
+
+
     <style name="main_footer_bar_radio" parent="footer_bar">
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">5dp</item>
@@ -58,6 +60,26 @@
     <style name="text_white_15">
         <item name="android:textColor">@color/text_white</item>
         <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="text_white_11">
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <style name="iphone_progress_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item> <!--Dialog的windowFrame框为无-->
+        <item name="android:windowIsFloating">true</item><!-- 是否漂现在activity上-->
+        <item name="android:windowIsTranslucent">true</item><!-- 是否半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item><!-- dim:模糊的 阴影效果 -->
     </style>
 
 </resources>

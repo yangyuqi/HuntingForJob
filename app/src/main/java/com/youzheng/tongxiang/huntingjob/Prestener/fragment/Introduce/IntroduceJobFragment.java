@@ -14,7 +14,9 @@ import com.youzheng.tongxiang.huntingjob.UI.Adapter.ViewHolder;
 import com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +32,8 @@ public class IntroduceJobFragment extends BaseFragment {
     ListView ls;
     Unbinder unbinder;
 
+    private int page =1 ,rows =20;
+
     private CommonAdapter<String> adapter;
     private List<String> data_data = new ArrayList<>();
 
@@ -40,6 +44,19 @@ public class IntroduceJobFragment extends BaseFragment {
         unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
+    private void initData() {
+        Map<String,Object> map = new HashMap<>();
+        map.put("page",page);
+        map.put("rows",rows);
+//        map.put("uid",)
     }
 
     private void initView() {

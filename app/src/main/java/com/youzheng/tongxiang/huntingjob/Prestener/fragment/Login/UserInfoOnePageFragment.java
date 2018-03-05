@@ -1,22 +1,52 @@
 package com.youzheng.tongxiang.huntingjob.Prestener.fragment.Login;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bigkoo.pickerview.OptionsPickerView;
+import com.codbking.widget.DatePickDialog;
+import com.codbking.widget.OnSureLisener;
+import com.codbking.widget.bean.DateType;
+import com.squareup.okhttp.Request;
+import com.youzheng.tongxiang.huntingjob.Model.Event.BaseEntity;
 import com.youzheng.tongxiang.huntingjob.Model.Event.EventModel;
+import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.AreaInfoBean;
+import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.AreaInfoChildBean;
+import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.EducationBean;
+import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.UserBaseBean;
+import com.youzheng.tongxiang.huntingjob.Model.request.OkHttpClientManager;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.BaseFragment;
 import com.youzheng.tongxiang.huntingjob.R;
+import com.youzheng.tongxiang.huntingjob.UI.Utils.PublicUtils;
+import com.youzheng.tongxiang.huntingjob.UI.Utils.SharedPreferencesUtils;
+import com.youzheng.tongxiang.huntingjob.UI.Utils.UrlUtis;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -25,10 +55,6 @@ import butterknife.Unbinder;
 
 public class UserInfoOnePageFragment extends BaseFragment {
 
-    @BindView(R.id.cb)
-    CheckBox cb;
-    @BindView(R.id.cb_woman)
-    CheckBox cbWoman;
     @BindView(R.id.tv_brith)
     TextView tvBrith;
     @BindView(R.id.tv_class)
@@ -36,6 +62,40 @@ public class UserInfoOnePageFragment extends BaseFragment {
     @BindView(R.id.btn_login)
     Button btnLogin;
     Unbinder unbinder;
+    @BindView(R.id.iv_select_time)
+    ImageView ivSelectTime;
+    @BindView(R.id.edt_name)
+    EditText edtName;
+    @BindView(R.id.edt_zhiwei)
+    EditText edtZhiwei;
+    @BindView(R.id.edt_address)
+    TextView edtAddress;
+    @BindView(R.id.iv_school)
+    ImageView ivSchool;
+
+    public int class_da, money_da, sex_da = 1;
+    public String hope_city ;
+    @BindView(R.id.edt_money)
+    TextView edtMoney;
+    @BindView(R.id.iv_money)
+    ImageView ivMoney;
+    @BindView(R.id.rg)
+    RadioGroup rg;
+    @BindView(R.id.rb)
+    RadioButton rb;
+    @BindView(R.id.rb_two)
+    RadioButton rbTwo;
+    @BindView(R.id.iv_address)
+    ImageView ivAddress;
+
+    private List<AreaInfoChildBean> options1Items = new ArrayList<>();
+    private List<List<AreaInfoChildBean>> options2Items = new ArrayList<>();
+    private List<List<List<AreaInfoChildBean>>> options3Items = new ArrayList<>();
+    private List<String> list_data = new ArrayList<>();
+    private List<List<String>> list_data_two = new ArrayList<>();
+    private List<List<List<String>>> list_data_third = new ArrayList<>();
+
+    private OptionsPickerView pvCustomTime;
 
     @Nullable
     @Override
@@ -47,19 +107,305 @@ public class UserInfoOnePageFragment extends BaseFragment {
         return view;
     }
 
-    private void initView() {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initDate();
+    }
+
+    private void initDate() {
+        OkHttpClientManager.postAsynJson("", UrlUtis.WORK_TIAOJIAN, new OkHttpClientManager.StringCallback() {
             @Override
-            public void onClick(View view) {
-                EventBus.getDefault().post(EventModel.GO_UPPER_PAGE);
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(String response) {
+
             }
         });
+    }
+
+
+    private void initView() {
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                if (i == rb.getId()) {
+                    sex_da = 1;
+                } else if (i == rbTwo.getId()) {
+                    sex_da = 0;
+                }
+            }
+        });
+    }
+
+    @OnClick({R.id.iv_select_time, R.id.btn_login, R.id.iv_school, R.id.iv_money,R.id.iv_address})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_select_time:
+                initTime();
+                break;
+            case R.id.btn_login:
+                if (edtName.getText().toString().equals("")) {
+                    showToast("填写姓名");
+                    return;
+                }
+                if (tvBrith.getText().toString().equals("")) {
+                    showToast("填写出生日期");
+                    return;
+                }
+
+                if (tvClass.getText().toString().equals("")) {
+                    showToast("填写最高学历");
+                    return;
+                }
+                if (edtZhiwei.getText().toString().equals("")) {
+                    showToast("填写职位");
+                    return;
+                }
+                if (edtMoney.getText().toString().equals("")) {
+                    showToast("填写期望月薪");
+                }
+
+                if (edtAddress.getText().toString().equals("")) {
+                    showToast("填写期望地点");
+                    return;
+                }
+                UserBaseBean baseBean = new UserBaseBean();
+                int uid = (int) SharedPreferencesUtils.getParam(mContext, SharedPreferencesUtils.uid, 0);
+                baseBean.setUid(uid);
+                baseBean.setTruename(edtName.getText().toString());
+                baseBean.setGender(sex_da);
+                baseBean.setBirthdate(tvBrith.getText().toString());
+                baseBean.setPosition(edtZhiwei.getText().toString());
+                baseBean.setEducation(class_da);
+                baseBean.setHope_city(hope_city);
+                baseBean.setWage(money_da);
+                EventBus.getDefault().post(baseBean);
+                EventBus.getDefault().post(EventModel.GO_UPPER_PAGE);
+                break;
+
+            case R.id.iv_school:
+                Map<String, Object> school_map = new HashMap<>();
+                school_map.put("ctype", "education");
+                OkHttpClientManager.postAsynJson(gson.toJson(school_map), UrlUtis.WORK_TIAOJIAN, new OkHttpClientManager.StringCallback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        BaseEntity entity = gson.fromJson(response, BaseEntity.class);
+                        if (entity.getCode().equals(PublicUtils.SUCCESS)) {
+                            final EducationBean comclass = gson.fromJson(gson.toJson(entity.getData()), EducationBean.class);
+                            if (comclass.getComclass().size() > 0) {
+                                final List<String> date = new ArrayList<String>();
+                                for (int i = 0; i < comclass.getComclass().size(); i++) {
+                                    date.add(comclass.getComclass().get(i).getName());
+                                }
+                                pvCustomTime = new OptionsPickerView.Builder(mContext, new OptionsPickerView.OnOptionsSelectListener() {
+                                    @Override
+                                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                                        for (int i = 0; i < comclass.getComclass().size(); i++) {
+                                            if (date.get(options1).equals(comclass.getComclass().get(i).getName())) {
+                                                tvClass.setText(date.get(options1));
+                                                class_da = comclass.getComclass().get(i).getId();
+                                            }
+                                        }
+                                    }
+                                }).setTitleText("选择学历").build();
+                                pvCustomTime.setPicker(date);
+                                pvCustomTime.show();
+                            }
+                        }
+                    }
+                });
+                break;
+
+            case R.id.iv_money:
+                Map<String, Object> money_map = new HashMap<>();
+                money_map.put("ctype", "wage");
+                OkHttpClientManager.postAsynJson(gson.toJson(money_map), UrlUtis.WORK_TIAOJIAN, new OkHttpClientManager.StringCallback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        BaseEntity entity = gson.fromJson(response, BaseEntity.class);
+                        if (entity.getCode().equals(PublicUtils.SUCCESS)) {
+                            final EducationBean comclass = gson.fromJson(gson.toJson(entity.getData()), EducationBean.class);
+                            if (comclass.getComclass().size() > 0) {
+                                final List<String> date = new ArrayList<String>();
+                                for (int i = 0; i < comclass.getComclass().size(); i++) {
+                                    date.add(comclass.getComclass().get(i).getName());
+                                }
+                                pvCustomTime = new OptionsPickerView.Builder(mContext, new OptionsPickerView.OnOptionsSelectListener() {
+                                    @Override
+                                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                                        for (int i = 0; i < comclass.getComclass().size(); i++) {
+                                            if (date.get(options1).equals(comclass.getComclass().get(i).getName())) {
+                                                edtMoney.setText(date.get(options1));
+                                                money_da = comclass.getComclass().get(i).getId();
+                                            }
+                                        }
+                                    }
+                                }).setTitleText("选择月薪").build();
+                                pvCustomTime.setPicker(date);
+                                pvCustomTime.show();
+                            }
+                        }
+                    }
+                });
+                break;
+
+            case R.id.iv_address :
+                String add = (String) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.AREAALL,"");
+                if (!add.equals("")){
+                    initAddress(add);
+                }else {
+                    OkHttpClientManager.postAsynJson("", UrlUtis.ALL_ADDRESS, new OkHttpClientManager.StringCallback() {
+                        @Override
+                        public void onFailure(Request request, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(String response) {
+                            BaseEntity entity = gson.fromJson(response, BaseEntity.class);
+                            if (entity.getCode().equals(PublicUtils.SUCCESS)) {
+                                initAddress(response);
+                            }
+                        }
+                    });
+                }
+                break;
+        }
+    }
+
+    private void initDialog() {
+        OptionsPickerView pickerView = new OptionsPickerView.Builder(mContext, new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                String tx = options1Items.get(options1).getAreaName()+
+                        options2Items.get(options1).get(options2).getAreaName()+
+                        options3Items.get(options1).get(options2).get(options3).getAreaName();
+
+                hope_city = options1Items.get(options1).getId()+","+options2Items.get(options1).get(options2).getId()+","+options3Items.get(options1).get(options2).get(options3).getId();
+                if (tx!=null&&!tx.equals("")) {
+                    edtAddress.setText(tx);
+                }
+
+                Toast.makeText(mContext,tx,Toast.LENGTH_SHORT).show();
+            }
+        }).setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .setOutSideCancelable(false)// default is true
+                .build();
+
+        pickerView.setPicker(list_data, list_data_two,list_data_third);//三级选择器
+        pickerView.show();
+    }
+
+    private void initTime() {
+        DatePickDialog dialog = new DatePickDialog(mContext);
+        //设置上下年分限制
+        dialog.setYearLimt(30);
+        //设置标题
+        dialog.setTitle("选择时间");
+        //设置类型
+        dialog.setType(DateType.TYPE_YMD);
+        //设置消息体的显示格式，日期格式
+        dialog.setMessageFormat("yyyy-MM-dd");
+        //设置选择回调
+        dialog.setOnChangeLisener(null);
+        //设置点击确定按钮回调
+        dialog.setOnSureLisener(new OnSureLisener() {
+            @Override
+            public void onSure(Date date) {
+                String dateStr = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                tvBrith.setText(dateStr);
+            }
+        });
+        dialog.show();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private void initAddress(String areaall) {
+        AreaInfoBean bean = gson.fromJson(areaall,AreaInfoBean.class);
+        options1Items.addAll(bean.getData().get("areaList"));
+
+            for (int q = 0 ; q<options1Items.size();q++){
+                list_data.add(options1Items.get(q).getAreaName());
+            }
+
+
+            for (int i = 0 ;i<options1Items.size();i++){
+                List<AreaInfoChildBean> CityList = new ArrayList<>();//该省的城市列表（第二级）
+                List<List<AreaInfoChildBean>> Province_AreaList = new ArrayList<>();//该省的所有地区列表（第三极）
+
+                List<String> c_city = new ArrayList<>();
+                List<List<String>> p_city = new ArrayList<>();
+
+
+                for (int c = 0 ;c<options1Items.get(i).getChilds().size();c++) {
+                    AreaInfoChildBean childBean = options1Items.get(i).getChilds().get(c);
+                    CityList.add(childBean);//添加城市
+
+                    c_city.add(options1Items.get(i).getChilds().get(c).getAreaName());
+
+
+                    List<AreaInfoChildBean> City_AreaList = new ArrayList<>();//该城市的所有地区列表
+
+                    List<String> c_list = new ArrayList<>();
+
+                    //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
+                    if (options1Items.get(i).getChilds().get(c).getAreaName() == null
+                            || options1Items.get(i).getChilds().get(c).getChilds().size() == 0) {
+                        City_AreaList.add(new AreaInfoChildBean("", "", null));
+                        c_list.add("");
+                    } else {
+                        for (int d = 0; d < options1Items.get(i).getChilds().get(c).getChilds().size(); d++) {//该城市对应地区所有数据
+                            AreaInfoChildBean AreaName = options1Items.get(i).getChilds().get(c).getChilds().get(d);
+
+                            City_AreaList.add(AreaName);//添加该城市所有地区数据
+                            c_list.add(AreaName.getAreaName());
+                        }
+                        Province_AreaList.add(City_AreaList);//添加该省所有地区数据
+                        p_city.add(c_list);
+                    }
+                }
+
+                /**
+                 * 添加城市数据
+                 */
+                options2Items.add(CityList);
+
+                /**
+                 * 添加地区数据
+                 */
+                options3Items.add(Province_AreaList);
+
+                list_data_two.add(c_city);
+                list_data_third.add(p_city);
+            }
+
+            if (options2Items.size()>0&&options3Items.size()>0&&options1Items.size()>0){
+                initDialog();
+                SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.AREAALL,areaall);
+            }
+
     }
 
 }

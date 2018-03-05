@@ -3,7 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/header_layout"/>
+
     <ScrollView
+        android:layout_margin="@dimen/space_15"
+        android:background="@mipmap/beijing"
+        android:scrollbars="none"
         android:overScrollMode="never"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -74,6 +79,7 @@
                             android:textSize="@dimen/text_size_13" />
 
                         <ImageView
+                            android:id="@+id/iv_rl1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -106,6 +112,7 @@
                             android:textSize="@dimen/text_size_13" />
 
                         <ImageView
+                            android:id="@+id/iv_rl2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -142,6 +149,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
+                        android:id="@+id/edt_xm"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
                         android:layout_centerVertical="true"
@@ -180,11 +188,11 @@
                     <EditText
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
-                        android:layout_centerVertical="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint=""
+                        android:hint="添加描述"
+                        android:id="@+id/edt_desc"
                         />
 
                 </RelativeLayout>

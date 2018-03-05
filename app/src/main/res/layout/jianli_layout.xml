@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -59,6 +60,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_name"
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -68,6 +70,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_sex"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
@@ -78,14 +81,15 @@
                         />
 
                     <View
-                        android:layout_marginBottom="@dimen/space_3"
-                        android:layout_marginTop="@dimen/space_2"
+                        android:layout_marginBottom="@dimen/space_5"
+                        android:layout_marginTop="@dimen/space_4"
                         android:layout_marginLeft="@dimen/space_15"
                         android:layout_width="@dimen/space_1"
                         android:layout_height="match_parent"
                         android:background="@color/text_gray"/>
 
                     <TextView
+                        android:id="@+id/tv_brith"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
@@ -107,6 +111,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_class"
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -129,6 +134,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/tv_phone"
                         android:drawablePadding="@dimen/space_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -137,19 +143,10 @@
                         android:drawableLeft="@mipmap/qiyexingzhi"
                         />
 
-                    <TextView
-                        android:drawablePadding="@dimen/space_2"
-                        android:layout_marginLeft="@dimen/space_10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="少于50"
-                        android:textSize="@dimen/text_size_10"
-                        android:drawableLeft="@mipmap/renshu"
-                        />
-
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_ll"
                     android:layout_marginLeft="@dimen/space_20"
                     android:layout_marginTop="3dp"
                     android:layout_below="@+id/ll_name_2"
@@ -160,6 +157,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/tv_email"
                         android:drawablePadding="@dimen/space_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -169,7 +167,27 @@
                         />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_marginLeft="@dimen/space_20"
+                    android:layout_marginTop="3dp"
+                    android:layout_below="@+id/ll_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/iv_co_icon"
+                    android:orientation="horizontal"
+                    >
 
+                    <TextView
+                        android:id="@+id/tv_status"
+                        android:drawablePadding="@dimen/space_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="电子商务"
+                        android:textSize="@dimen/text_size_10"
+                        android:drawableLeft="@mipmap/zuobiaoocopy3"
+                        />
+
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -216,20 +234,53 @@
 
                 <RelativeLayout
                     android:paddingBottom="@dimen/space_20"
-                    android:paddingTop="@dimen/space_20"
+                    android:paddingTop="@dimen/space_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:drawablePadding="@dimen/space_5"
-                        android:textSize="@dimen/text_size_15"
-                        android:layout_centerInParent="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="尚未填写信息,完善信息可提高应聘几率~"
-                        android:textColor="@color/text_light_gray"
-                        android:drawableLeft="@mipmap/shangwei"
-                        />
+                   <LinearLayout
+                       android:paddingLeft="@dimen/space_30"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       >
+
+                       <TextView
+                           android:id="@+id/tv_work_for"
+                           android:textSize="15sp"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textColor="@color/bg_origin"
+                           />
+
+                       <TextView
+                           android:id="@+id/tv_work_dus"
+                           android:textSize="11sp"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textColor="@color/text_gray"
+                           />
+
+                       <TextView
+                           android:layout_marginTop="@dimen/space_3"
+                           android:id="@+id/tv_work_place"
+                           android:textSize="11sp"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textColor="@color/text_gray"
+                           />
+
+                       <TextView
+                           android:layout_marginTop="@dimen/space_3"
+                           android:id="@+id/tv_work_money"
+                           android:textSize="11sp"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:textColor="@color/text_gray"
+                           />
+
+
+                   </LinearLayout>
 
                 </RelativeLayout>
 
@@ -277,12 +328,13 @@
                     android:background="@color/text_gray"/>
 
                 <RelativeLayout
-                    android:paddingBottom="@dimen/space_20"
-                    android:paddingTop="@dimen/space_20"
+                    android:paddingBottom="@dimen/space_15"
+                    android:paddingTop="@dimen/space_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_experience"
                         android:drawablePadding="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
                         android:layout_centerInParent="true"
@@ -292,6 +344,14 @@
                         android:textColor="@color/text_light_gray"
                         android:drawableLeft="@mipmap/shangwei"
                         />
+
+                    <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                        android:layout_marginLeft="@dimen/space_8"
+                        android:divider="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ls_experence"
+                        ></com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView>
 
                 </RelativeLayout>
 
@@ -330,6 +390,7 @@
                         android:layout_centerVertical="true"
                         />
 
+
                 </RelativeLayout>
 
                 <View
@@ -346,6 +407,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_project"
                         android:drawablePadding="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
                         android:layout_centerInParent="true"
@@ -355,6 +417,14 @@
                         android:textColor="@color/text_light_gray"
                         android:drawableLeft="@mipmap/shangwei"
                         />
+
+                    <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                        android:layout_marginLeft="@dimen/space_8"
+                        android:divider="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ls_project"
+                        ></com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView>
 
                 </RelativeLayout>
 
@@ -408,6 +478,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_jiaoyue"
                         android:drawablePadding="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
                         android:layout_centerInParent="true"
@@ -417,6 +488,14 @@
                         android:textColor="@color/text_light_gray"
                         android:drawableLeft="@mipmap/shangwei"
                         />
+
+                    <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                        android:layout_marginLeft="@dimen/space_8"
+                        android:divider="@null"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ls_jiaoyue"
+                        ></com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView>
 
                 </RelativeLayout>
 
@@ -470,6 +549,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_jineng"
                         android:drawablePadding="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
                         android:layout_centerInParent="true"
@@ -479,6 +559,29 @@
                         android:textColor="@color/text_light_gray"
                         android:drawableLeft="@mipmap/shangwei"
                         />
+
+                    <com.donkingliang.labels.LabelsView
+                        android:paddingBottom="@dimen/space_15"
+                        android:layout_marginRight="@dimen/space_10"
+                        android:layout_marginLeft="@dimen/space_10"
+                        android:id="@+id/labelView"
+                        android:layout_marginTop="@dimen/space_10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:labelBackground="@drawable/label_bg"
+                        app:labelTextColor="@drawable/label_text_color"
+                        app:labelTextSize="11sp"
+                        app:labelTextPaddingBottom="5dp"
+                        app:labelTextPaddingLeft="10dp"
+                        app:labelTextPaddingRight="10dp"
+                        app:labelTextPaddingTop="5dp"
+                        app:lineMargin="10dp"
+                        app:wordMargin="10dp"
+                        app:selectType="SINGLE"
+                        app:maxSelect="5"
+                        >
+
+                    </com.donkingliang.labels.LabelsView>
 
                 </RelativeLayout>
 
@@ -526,12 +629,13 @@
                     android:background="@color/text_gray"/>
 
                 <RelativeLayout
-                    android:paddingBottom="@dimen/space_20"
-                    android:paddingTop="@dimen/space_20"
+                    android:paddingBottom="@dimen/space_10"
+                    android:paddingTop="@dimen/space_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tv_desc"
                         android:drawablePadding="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
                         android:layout_centerInParent="true"
@@ -540,6 +644,16 @@
                         android:text="尚未填写信息,完善信息可提高应聘几率~"
                         android:textColor="@color/text_light_gray"
                         android:drawableLeft="@mipmap/shangwei"
+                        />
+
+                    <TextView
+                        android:layout_marginLeft="@dimen/space_13"
+                        android:id="@+id/tv_desc_desc"
+                        android:textSize="@dimen/text_size_12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="尚未填写信息,完善信息可提高应聘几率~"
+                        android:textColor="@color/text_gray"
                         />
 
                 </RelativeLayout>

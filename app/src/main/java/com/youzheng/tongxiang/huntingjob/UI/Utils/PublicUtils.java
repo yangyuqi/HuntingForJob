@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.support.design.widget.TabLayout;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -13,12 +14,19 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.lang.reflect.Field;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by qiuweiyu on 2018/2/9.
  */
 
 public class PublicUtils {
+
+    public static String SUCCESS = "200" ;
+
     public static int px2dip(int pxValue) {
         final float scale = Resources.getSystem().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
@@ -60,6 +68,16 @@ public class PublicUtils {
             child.setLayoutParams(params);
             child.invalidate();
         }
+    }
+
+    public static String getPhotoImEi(Context context){
+        TelephonyManager mTm = (TelephonyManager)context.getSystemService(context.TELEPHONY_SERVICE);
+        String imei = mTm.getDeviceId();
+        String imsi = mTm.getSubscriberId();
+        String mtype = android.os.Build.MODEL; // 手机型号
+        String mtyb= android.os.Build.BRAND;//手机品牌
+        String numer = mTm.getLine1Number(); // 手机号码，有的可得，有的不可得
+        return imei ;
     }
 
 
@@ -109,6 +127,66 @@ public class PublicUtils {
             Log.e("VersionInfo", "Exception", e);
         }
         return versionName;
+    }
+
+
+    /**
+     * 验证手机号码
+     * @param mobile
+     * @return
+     */
+    public static boolean checkMobileNumber(String mobile){
+        boolean flag = false;
+        try{
+            String regexStr = "((13[0-9])|(15[0-9])|(17[0-9])|(18[0-9]))\\d{8}$";
+            Pattern regex = Pattern.compile(regexStr);
+            Matcher matcher = regex.matcher(mobile);
+            flag = matcher.matches();
+        }catch(Exception e){
+            flag = false;
+        }
+        return flag;
+    }
+
+    public static boolean StringIsNull(String data){
+        if (data!=null){
+            if (!data.equals("")){
+                return false;
+            }
+        }
+        return true ;
+    }
+
+    /**
+     * md5加密方法
+     * @param password
+     * @return
+     */
+    public static String md5Password(String password) {
+
+        try {
+            // 得到一个信息摘要器
+            MessageDigest digest = MessageDigest.getInstance("md5");
+            byte[] result = digest.digest(password.getBytes());
+            StringBuffer buffer = new StringBuffer();
+            // 把没一个byte 做一个与运算 0xff;
+            for (byte b : result) {
+                // 与运算
+                int number = b & 0xff;// 加盐
+                String str = Integer.toHexString(number);
+                if (str.length() == 1) {
+                    buffer.append("0");
+                }
+                buffer.append(str);
+            }
+
+            // 标准的md5加密后的结果
+            return buffer.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return "";
+        }
+
     }
 
 }
