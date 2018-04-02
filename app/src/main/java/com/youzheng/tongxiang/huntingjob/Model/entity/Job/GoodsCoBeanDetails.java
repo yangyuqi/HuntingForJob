@@ -22,6 +22,15 @@ public class GoodsCoBeanDetails {
     private double wage_min ;
     private String com_logo ;
     private String keyword ;
+    private String tradeName ;
+
+    public String getTradeName() {
+        return tradeName;
+    }
+
+    public void setTradeName(String tradeName) {
+        this.tradeName = tradeName;
+    }
 
     public String getEducation() {
         return education;

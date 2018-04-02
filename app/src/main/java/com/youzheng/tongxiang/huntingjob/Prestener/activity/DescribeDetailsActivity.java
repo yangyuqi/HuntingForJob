@@ -29,14 +29,9 @@ import butterknife.ButterKnife;
  */
 
 public class DescribeDetailsActivity extends BaseActivity {
-//    @BindView(R.id.btnBack)
-//    ImageView btnBack;
+
     @BindView(R.id.rl_content)
     FrameLayout rlContent;
-//    @BindView(R.id.textHeadTitle)
-//    TextView textHeadTitle;
-//    @BindView(R.id.textHeadNext)
-//    TextView textHeadNext;
     private String type ;
 
     @Override
@@ -49,16 +44,7 @@ public class DescribeDetailsActivity extends BaseActivity {
     }
 
     private void initView() {
-//        textHeadTitle.setVisibility(View.GONE);
-//        btnBack.setVisibility(View.VISIBLE);
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finish();
-//            }
-//        });
-//        textHeadNext.setText("完成");
-//        textHeadNext.setVisibility(View.VISIBLE);
+
     }
 
     @Override

@@ -13,6 +13,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -187,6 +192,19 @@ public class PublicUtils {
             return "";
         }
 
+    }
+
+    public static String getNewContent(String htmltext){
+        try {
+            Document doc= Jsoup.parse(htmltext);
+            Elements elements=doc.getElementsByTag("img");
+            for (Element element : elements) {
+                element.attr("width","100%").attr("height","auto");
+            }
+            return doc.toString();
+        }catch (Exception e){
+            return "";
+        }
     }
 
 }

@@ -25,10 +25,13 @@ import com.youzheng.tongxiang.huntingjob.UI.dialog.RegisterSuccessDialog;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import rx.functions.Action1;
 
 /**
@@ -75,7 +78,7 @@ public class RegisterPhoneActivity extends BaseActivity {
         btnBack.setVisibility(View.VISIBLE);
         layoutHeader.setBackgroundResource(R.drawable.main_color);
 
-        timer = new MyCountDownTimer(btnGetCode,4000,1000);
+        timer = new MyCountDownTimer(btnGetCode,60000,1000);
 
     }
 
@@ -102,7 +105,7 @@ public class RegisterPhoneActivity extends BaseActivity {
                 final Map<String,Object> map = new HashMap<>();
                 map.put("username",tvPhone.getText().toString());
                 map.put("password",PublicUtils.md5Password(tvPwd.getText().toString()));
-                map.put("smsCode","123456");
+                map.put("smsCode",tvCode.getText().toString());
                 map.put("userType","0");
 
                 OkHttpClientManager.postAsynJson(gson.toJson(map), UrlUtis.REGISTER_URL, new OkHttpClientManager.StringCallback() {
@@ -121,6 +124,13 @@ public class RegisterPhoneActivity extends BaseActivity {
                                 @Override
                                 public void call(Boolean aBoolean) {
                                     if (aBoolean){
+                                        JPushInterface.setAlias(mContext, PublicUtils.getPhotoImEi(mContext), new TagAliasCallback() {
+                                            @Override
+                                            public void gotResult(int i, String s, Set<String> set) {
+
+
+                                            }
+                                        });
                                         map.put("deviceNo",PublicUtils.getPhotoImEi(mContext));
                                     }
                                 }
@@ -143,6 +153,7 @@ public class RegisterPhoneActivity extends BaseActivity {
                                         UserBean bean = gson.fromJson(gson.toJson(entity.getData()),UserBean.class);
                                         SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.access_token,bean.getAccess_token());
                                         SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.uid,bean.getUid());
+                                        SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.mobile,bean.getUsername());
                                         final RegisterSuccessDialog dialog = new RegisterSuccessDialog(mContext);
                                         dialog.show();
                                     }else {

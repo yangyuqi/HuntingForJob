@@ -38,9 +38,10 @@
         android:layout_height="match_parent">
 
         <ScrollView
+            android:background="@color/text_white"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <RadioGroup
                 android:id="@+id/rg_two"
                 android:orientation="vertical"
@@ -56,11 +57,12 @@
             android:background="@color/text_gray"/>
 
         <ListView
+            android:background="@color/text_white"
             android:divider="@null"
             android:id="@+id/ls_three"
             android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         </ListView>
 

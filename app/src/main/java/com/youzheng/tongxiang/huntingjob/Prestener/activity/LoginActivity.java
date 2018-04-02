@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.squareup.okhttp.Request;
 import com.tbruyelle.rxpermissions.RxPermissions;
+import com.youzheng.tongxiang.huntingjob.MainActivity;
 import com.youzheng.tongxiang.huntingjob.Model.Event.BaseEntity;
 import com.youzheng.tongxiang.huntingjob.Model.entity.user.UserBean;
 import com.youzheng.tongxiang.huntingjob.Model.request.OkHttpClientManager;
@@ -24,10 +25,13 @@ import com.youzheng.tongxiang.huntingjob.UI.dialog.RegisterSuccessDialog;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import rx.functions.Action1;
 
 /**
@@ -52,6 +56,13 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
         ButterKnife.bind(this);
+
+        String phone = (String) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.mobile,"");
+        if (phone!=null){
+            if (!phone.equals("")){
+                tvPhone.setText(phone);
+            }
+        }
     }
 
     @OnClick({R.id.tv_register,R.id.tv_pwd,R.id.btn_login,R.id.tv_find_pwd})
@@ -73,18 +84,25 @@ public class LoginActivity extends BaseActivity {
                     showToast("密码不能为空");
                     return;
                 }
-
+                final Map<String,Object> map = new HashMap<>();
                 RxPermissions permissions = new RxPermissions(LoginActivity.this);
                 permissions.request(Manifest.permission.READ_PHONE_STATE).subscribe(new Action1<Boolean>() {
                     @Override
                     public void call(Boolean aBoolean) {
                             if (aBoolean){
-                                final Map<String,Object> map = new HashMap<>();
+                                map.put("deviceNo",PublicUtils.getPhotoImEi(mContext));
+                                JPushInterface.setAlias(mContext, PublicUtils.getPhotoImEi(mContext), new TagAliasCallback() {
+                                    @Override
+                                    public void gotResult(int i, String s, Set<String> set) {}
+                                        });
+
+                                    }
+                                 }
+                            });
                                 map.put("username",tvPhone.getText().toString());
                                 map.put("password",PublicUtils.md5Password(tvPwd.getText().toString()));
                                 map.put("userType","0");
                                 map.put("deviceType","android");
-                                map.put("deviceNo",PublicUtils.getPhotoImEi(mContext));
                                 OkHttpClientManager.postAsynJson(gson.toJson(map), UrlUtis.LOGIN_URL, new OkHttpClientManager.StringCallback() {
                                     @Override
                                     public void onFailure(Request request, IOException e) {
@@ -99,16 +117,14 @@ public class LoginActivity extends BaseActivity {
                                             SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.access_token,bean.getAccess_token());
                                             SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.uid,bean.getUid());
                                             SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.rid,bean.getRid());
+                                            SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.mobile,bean.getUsername());
+                                            startActivity(new Intent(mContext, MainActivity.class));
                                             finish();
                                         }else {
                                             showToast(entity.getMsg());
                                         }
                                     }
                                 });
-                            }
-                    }
-                });
-
                 break;
         }
     }

@@ -64,6 +64,8 @@
                     android:layout_height="250dp">
 
                     <EditText
+                        android:textColor="@color/text_normal_gray"
+                        android:paddingTop="@dimen/space_10"
                         android:id="@+id/edt_des"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"

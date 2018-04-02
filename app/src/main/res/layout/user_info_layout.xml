@@ -42,7 +42,6 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/space_10"
             android:layout_toRightOf="@+id/civ"
-            android:src="@mipmap/jiantouyou"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

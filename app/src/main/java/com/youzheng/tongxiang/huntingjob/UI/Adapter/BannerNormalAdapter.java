@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
+import com.youzheng.tongxiang.huntingjob.Model.entity.deliver.BannerListBean;
 import com.youzheng.tongxiang.huntingjob.R;
 
 import java.util.List;
@@ -17,9 +18,9 @@ import java.util.List;
 
 public class BannerNormalAdapter extends StaticPagerAdapter {
 
-    private List<Integer> banner_date;
+    private List<BannerListBean> banner_date;
 
-    public BannerNormalAdapter(List<Integer> entity) {
+    public BannerNormalAdapter(List<BannerListBean> entity) {
         banner_date = entity;
     }
 
@@ -27,7 +28,7 @@ public class BannerNormalAdapter extends StaticPagerAdapter {
     public View getView(ViewGroup container, final int position) {
         View new_view = LayoutInflater.from(container.getContext()).inflate(R.layout.image_new_layout,null);
         ImageView view = (ImageView) new_view.findViewById(R.id.iv_new);
-        Glide.with(container.getContext()).load(banner_date.get(position)).placeholder(R.mipmap.ic_launcher).into(view);
+        Glide.with(container.getContext()).load(banner_date.get(position).getImgUrl()).into(view);
         return new_view;
     }
 

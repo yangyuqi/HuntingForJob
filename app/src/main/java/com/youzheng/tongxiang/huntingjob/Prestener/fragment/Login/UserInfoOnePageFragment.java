@@ -316,7 +316,7 @@ public class UserInfoOnePageFragment extends BaseFragment {
     private void initTime() {
         DatePickDialog dialog = new DatePickDialog(mContext);
         //设置上下年分限制
-        dialog.setYearLimt(30);
+        dialog.setYearLimt(80);
         //设置标题
         dialog.setTitle("选择时间");
         //设置类型

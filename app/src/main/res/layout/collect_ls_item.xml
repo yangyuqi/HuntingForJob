@@ -92,17 +92,21 @@
 
 
                 <TextView
+                    android:singleLine="true"
+                    android:gravity="start"
+                    android:layout_toLeftOf="@+id/tv_time"
                     android:id="@+id/tv_below"
                     android:textSize="@dimen/text_size_11"
                     android:textColor="@color/text_gray"
                     android:text="电子商务/软件开发"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_name_co"
                     android:layout_marginTop="@dimen/space_5"
                     />
 
                 <TextView
+                    android:layout_marginLeft="@dimen/space_5"
                     android:id="@+id/tv_time"
                     android:layout_marginBottom="@dimen/space_4"
                     android:layout_marginRight="@dimen/space_20"

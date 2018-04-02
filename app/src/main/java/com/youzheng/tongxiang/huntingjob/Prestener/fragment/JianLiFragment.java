@@ -1,5 +1,6 @@
 package com.youzheng.tongxiang.huntingjob.Prestener.fragment;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,8 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.donkingliang.labels.LabelsView;
 import com.squareup.okhttp.Request;
+import com.tbruyelle.rxpermissions.RxPermissions;
+import com.youzheng.tongxiang.huntingjob.MainActivity;
 import com.youzheng.tongxiang.huntingjob.Model.Event.BaseEntity;
 import com.youzheng.tongxiang.huntingjob.Model.Event.SelectJianLiBean;
 import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.BaseJianli;
@@ -19,18 +23,26 @@ import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.EducitionBean;
 import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.ProjectBean;
 import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.SkillListBean;
 import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.WorkExperenceBean;
+import com.youzheng.tongxiang.huntingjob.Model.entity.user.PhotoBean;
 import com.youzheng.tongxiang.huntingjob.Model.request.OkHttpClientManager;
 import com.youzheng.tongxiang.huntingjob.Prestener.activity.DescribeDetailsActivity;
+import com.youzheng.tongxiang.huntingjob.Prestener.activity.LoginActivity;
+import com.youzheng.tongxiang.huntingjob.Prestener.activity.User.UserCenterActivity;
 import com.youzheng.tongxiang.huntingjob.Prestener.activity.WorkExperienceActivity;
 import com.youzheng.tongxiang.huntingjob.R;
 import com.youzheng.tongxiang.huntingjob.UI.Adapter.CommonAdapter;
 import com.youzheng.tongxiang.huntingjob.UI.Adapter.ViewHolder;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.PublicUtils;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.UrlUtis;
+import com.youzheng.tongxiang.huntingjob.UI.Widget.CircleImageView;
 import com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView;
+import com.youzheng.tongxiang.huntingjob.UI.dialog.BottomPhotoDialog;
+import com.youzheng.tongxiang.huntingjob.UI.dialog.DeleteDialog;
+import com.youzheng.tongxiang.huntingjob.UI.dialog.DeleteDialogInterface;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +53,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import me.iwf.photopicker.PhotoPicker;
+import me.iwf.photopicker.utils.ImageCaptureManager;
+import rx.functions.Action1;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by qiuweiyu on 2018/2/7.
@@ -107,6 +124,13 @@ public class JianLiFragment extends BaseFragment {
     TextView tvDesc;
     @BindView(R.id.tv_desc_desc)
     TextView tvDescDesc;
+    @BindView(R.id.iv_co_icon)
+    CircleImageView ivCoIcon;
+    @BindView(R.id.ll_id)
+    LinearLayout llId;
+    @BindView(R.id.ll_ll)
+    LinearLayout llLl;
+    ImageCaptureManager captureManager ;
 
     private CommonAdapter<WorkExperenceBean> ex_adapter;
     private List<WorkExperenceBean> ex_data = new ArrayList<>();
@@ -154,7 +178,10 @@ public class JianLiFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        initData();
+        if (!accessToken.equals("")) {
+            initData();
+        } else {
+        }
     }
 
     private void initData() {
@@ -179,11 +206,14 @@ public class JianLiFragment extends BaseFragment {
                         } else {
                             tvSex.setText("女");
                         }
-                        tvClass.setText(baseJianli.getResume().getEducation());
+                        if (baseJianli.getResume().getPhoto()!=null) {
+                            Glide.with(mContext).load(baseJianli.getResume().getPhoto()).into(ivCoIcon);
+                        }
+                        tvClass.setText(baseJianli.getResume().getEducation() +"  |  "+ baseJianli.getResume().getCitysName()+"  |  " + baseJianli.getResume().getWork_year()+"工作经验");
                         tvPhone.setText(baseJianli.getResume().getTelephone());
                         tvEmail.setText(baseJianli.getResume().getEmail());
                         tvBrith.setText(baseJianli.getResume().getBirthdate());
-
+                        tvStatus.setText(baseJianli.getResume().getStateName());
                         tvWorkFor.setText(baseJianli.getResume().getPosition());
                         tvWorkDus.setText("期望行业 :" + baseJianli.getResume().getTradeName());
                         tvWorkPlace.setText("期望地点 :" + baseJianli.getResume().getHopeCityName());
@@ -221,6 +251,7 @@ public class JianLiFragment extends BaseFragment {
 
                         if (baseJianli.getSkillList().size() > 0) {
                             tvJineng.setVisibility(View.GONE);
+                            labelView.setVisibility(View.VISIBLE);
                             ArrayList<String> data = new ArrayList<String>();
                             for (int i = 0; i < baseJianli.getSkillList().size(); i++) {
                                 data.add(baseJianli.getSkillList().get(i).getSkill() + "  " + baseJianli.getSkillList().get(i).getDegree());
@@ -232,12 +263,12 @@ public class JianLiFragment extends BaseFragment {
                         }
 
                         if (baseJianli.getResume().getSelf_description() == null) {
-                                tvDescDesc.setVisibility(View.GONE);
-                                tvDesc.setVisibility(View.VISIBLE);
-                        }else {
-                              tvDesc.setVisibility(View.GONE);
-                             tvDescDesc.setVisibility(View.VISIBLE);
-                            tvDescDesc.setText(baseJianli.getResume().getSelf_description() );
+                            tvDescDesc.setVisibility(View.GONE);
+                            tvDesc.setVisibility(View.VISIBLE);
+                        } else {
+                            tvDesc.setVisibility(View.GONE);
+                            tvDescDesc.setVisibility(View.VISIBLE);
+                            tvDescDesc.setText(baseJianli.getResume().getSelf_description());
                         }
 
                     }
@@ -283,7 +314,7 @@ public class JianLiFragment extends BaseFragment {
         lsJiaoyue.setAdapter(ed_adapter);
     }
 
-    @OnClick({R.id.rl_desc, R.id.rl_work, R.id.rl_jinyan, R.id.rl_study, R.id.rl_jineng, R.id.rl_pingjia})
+    @OnClick({R.id.rl_desc, R.id.rl_work, R.id.rl_jinyan, R.id.rl_study, R.id.rl_jineng, R.id.rl_pingjia,R.id.iv_co_icon})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.rl_desc:
@@ -309,6 +340,25 @@ public class JianLiFragment extends BaseFragment {
             case R.id.rl_pingjia:
                 which = "6";
                 startActivity(new Intent(mContext, DescribeDetailsActivity.class));
+                break;
+            case R.id.iv_co_icon:
+                final BottomPhotoDialog dialog = new BottomPhotoDialog(mContext, R.layout.view_popupwindow);
+                dialog.show();
+                dialog.getTv_pick_phone().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        takePhoto();
+                    }
+                });
+
+                dialog.getTv_select_photo().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        selectPhoto();
+                    }
+                });
                 break;
         }
     }
@@ -367,6 +417,109 @@ public class JianLiFragment extends BaseFragment {
                     EventBus.getDefault().post(selectJianLiBean);
                     break;
 
+            }
+        }
+    }
+
+    private void takePhoto() {
+        RxPermissions permissions = new RxPermissions((MainActivity)mContext);
+        permissions.request(Manifest.permission.CAMERA,Manifest.permission.VIBRATE,Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean aBoolean) {
+                if (aBoolean){
+                    captureManager = new ImageCaptureManager(mContext);
+                    Intent intent = null;
+                    try {
+                        intent = captureManager.dispatchTakePictureIntent();
+                        startActivityForResult(intent, ImageCaptureManager.REQUEST_TAKE_PHOTO);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+    private void selectPhoto() {
+        RxPermissions permissions = new RxPermissions((MainActivity)mContext);
+        permissions.request(Manifest.permission.CAMERA,Manifest.permission.VIBRATE,Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean aBoolean) {
+                if (aBoolean){
+                    //选择相册
+                    PhotoPicker.builder()
+                            .setPhotoCount(1)
+                            .setShowCamera(true)
+                            .setShowGif(true)
+                            .setPreviewEnabled(false)
+                            .start(mContext ,JianLiFragment.this,PhotoPicker.REQUEST_CODE);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            switch (requestCode){
+                // 拍照
+                case ImageCaptureManager.REQUEST_TAKE_PHOTO:
+                    if(captureManager.getCurrentPhotoPath() != null) {
+                        captureManager.galleryAddPic();
+                        // 照片地址
+                        String imagePaht = captureManager.getCurrentPhotoPath();
+                        updatePhoto(imagePaht);
+                    }
+                    break;
+            }
+        }
+        if (resultCode == RESULT_OK && requestCode == PhotoPicker.REQUEST_CODE){
+            if (data != null) {
+                ArrayList<String> photos = data.getStringArrayListExtra(PhotoPicker.KEY_SELECTED_PHOTOS);
+                String imagePaht = photos.get(0) ;
+                updatePhoto(imagePaht);
+            }
+        }
+    }
+    private void updatePhoto(String imagePaht) {
+        if (imagePaht!=null) {
+            File file = new File(imagePaht);
+            try {
+                OkHttpClientManager.postAsyn(UrlUtis.UPLOAD_FILE, new OkHttpClientManager.StringCallback() {
+                    @Override
+                    public void onFailure(Request request, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response) {
+                        BaseEntity entity = gson.fromJson(response,BaseEntity.class);
+                        if (entity.getCode().equals(PublicUtils.SUCCESS)){
+                            PhotoBean photoBean = gson.fromJson(gson.toJson(entity.getData()),PhotoBean.class);
+                            showToast(photoBean.getInfo());
+                            Map<String,Object> h_map = new HashMap<>();
+                            h_map.put("rid",rid);
+                            h_map.put("photo",photoBean.getFilepath());
+                            OkHttpClientManager.postAsynJson(gson.toJson(h_map), UrlUtis.EDIT_RESUME_INFO, new OkHttpClientManager.StringCallback() {
+                                @Override
+                                public void onFailure(Request request, IOException e) {
+
+                                }
+
+                                @Override
+                                public void onResponse(String response) {
+                                    BaseEntity entity1 = gson.fromJson(response,BaseEntity.class);
+                                    if (entity1.getCode().equals(PublicUtils.SUCCESS)){
+                                        initData();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                },file,"file");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

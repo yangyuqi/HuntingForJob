@@ -71,8 +71,6 @@ public class DeliverMessageActivity extends BaseActivity {
     }
 
     private void iniDate(int status) {
-        final ProgressDialog dialog2 = ProgressDialog.show(mContext, "提示", "正在加载");
-        dialog2.show();
         Map<String,Object> map = new HashMap<>();
         map.put("uid",uid);
         map.put("status",status);
@@ -81,12 +79,11 @@ public class DeliverMessageActivity extends BaseActivity {
         OkHttpClientManager.postAsynJson(gson.toJson(map), UrlUtis.DELIEVERY_MSG_LIST, new OkHttpClientManager.StringCallback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                dialog2.dismiss();
+
             }
 
             @Override
             public void onResponse(String response) {
-                dialog2.dismiss();
                 BaseEntity entity = gson.fromJson(response,BaseEntity.class);
                 if (entity.getCode().equals(PublicUtils.SUCCESS)){
                     DeliverBeanList list = gson.fromJson(gson.toJson(entity.getData()),DeliverBeanList.class);
@@ -115,17 +112,32 @@ public class DeliverMessageActivity extends BaseActivity {
                 helper.setText(R.id.tv_name,item.getTitle());
                 helper.setText(R.id.tv_level_l,item.getEducation()+"/"+item.getCitysName());
                 helper.setText(R.id.tv_name_co,item.getName());
-                helper.setText(R.id.tv_below,item.getJobtag());
+                helper.setText(R.id.tv_below,item.getTradeName());
                 CircleImageView imageView = helper.getView(R.id.iv_logo);
-                Glide.with(mContext).load(item.getCom_logo()).placeholder(R.mipmap.zhaoshangyinhang).into(imageView);
-                helper.setText(R.id.tv_money,""+item.getWage_min()/1000+"K"+"-"+item.getWage_max()/1000+"K");
+                Glide.with(mContext).load(item.getCom_logo()).placeholder(R.mipmap.youyuzhanweicopy2).into(imageView);
+                if (item.getWage_face()==0) {
+                    helper.setText(R.id.tv_money, "" + item.getWage_min() / 1000 + "K" + "-" + item.getWage_max() / 1000 + "K");
+                }else {
+                    helper.setText(R.id.tv_money,"面议");
+                }
                 if (item.getStatus()==1){
+                    ((ImageView)helper.getView(R.id.iv_icon)).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.rl_bg).setBackgroundResource(R.mipmap.groweup);
+                    (helper.getView(R.id.rl_hong)).setVisibility(View.GONE);
                     ((ImageView)helper.getView(R.id.iv_icon)).setImageResource(R.mipmap.toudichenggong);
                 }else if (item.getStatus()==2){
+                    ((ImageView)helper.getView(R.id.iv_icon)).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.rl_bg).setBackgroundResource(R.mipmap.groweup);
+                    (helper.getView(R.id.rl_hong)).setVisibility(View.GONE);
                     ((ImageView)helper.getView(R.id.iv_icon)).setImageResource(R.mipmap.chakan);
                 }else if (item.getStatus()==3){
-                    ((ImageView)helper.getView(R.id.iv_icon)).setImageResource(R.mipmap.mianshiyaoqing);
+                    ((ImageView)helper.getView(R.id.iv_icon)).setVisibility(View.GONE);
+                    helper.getView(R.id.rl_bg).setBackgroundResource(R.drawable.invite_bg_);
+                    (helper.getView(R.id.rl_hong)).setVisibility(View.VISIBLE);
                 }else if (item.getStatus()==4){
+                    ((ImageView)helper.getView(R.id.iv_icon)).setVisibility(View.VISIBLE);
+                    helper.getView(R.id.rl_bg).setBackgroundResource(R.mipmap.groweup);
+                    (helper.getView(R.id.rl_hong)).setVisibility(View.GONE);
                     ((ImageView)helper.getView(R.id.iv_icon)).setImageResource(R.mipmap.buheshi);
                 }
 

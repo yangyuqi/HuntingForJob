@@ -72,8 +72,11 @@
                         android:background="@drawable/user_info_bg">
 
                         <TextView
+                            android:layout_toLeftOf="@+id/iv_rili1"
+                            android:gravity="start"
+                            android:textColor="@color/text_normal_gray"
                             android:id="@+id/tv_work_start"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:paddingLeft="@dimen/space_10"
@@ -85,7 +88,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:padding="@dimen/space_15"
+                            android:padding="@dimen/space_10"
                             android:src="@mipmap/rili" />
 
                     </RelativeLayout>
@@ -105,8 +108,11 @@
                         android:background="@drawable/user_info_bg">
 
                         <TextView
+                            android:layout_toLeftOf="@+id/iv_rili2"
+                            android:gravity="start"
+                            android:textColor="@color/text_normal_gray"
                             android:id="@+id/tv_brith"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:paddingLeft="@dimen/space_10"
@@ -150,6 +156,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/edt_school"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
@@ -187,12 +194,15 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/tv_city"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
                         android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/iv_level"
+                        android:gravity="start"
                         />
 
                     <ImageView
@@ -233,6 +243,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
+                        android:textColor="@color/text_normal_gray"
                         android:background="@null"
                         android:id="@+id/tv_study_work"
                         android:paddingLeft="@dimen/space_10"
@@ -324,6 +335,8 @@
                     android:layout_height="250dp">
 
                     <EditText
+                        android:textColor="@color/text_normal_gray"
+                        android:paddingTop="@dimen/space_10"
                         android:id="@+id/edt_miaoshu"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"

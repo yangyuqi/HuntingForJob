@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.youzheng.tongxiang.huntingjob.Prestener.activity.BaseActivity;
 import com.youzheng.tongxiang.huntingjob.R;
+import com.youzheng.tongxiang.huntingjob.UI.Utils.SharedPreferencesUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,5 +43,7 @@ public class BandPhoneActivity extends BaseActivity {
             }
         });
         textHeadTitle.setText("账号绑定");
+        String phone = (String) SharedPreferencesUtils.getParam(mContext,SharedPreferencesUtils.mobile,"");
+        tvPhone.setText(phone);
     }
 }

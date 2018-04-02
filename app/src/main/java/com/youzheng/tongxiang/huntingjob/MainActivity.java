@@ -8,12 +8,16 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.youzheng.tongxiang.huntingjob.Model.Event.EventModel;
 import com.youzheng.tongxiang.huntingjob.Prestener.activity.BaseActivity;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.CategoryFragment;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.HomePageFragment;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.JianLiFragment;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.MessageFragment;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.UserCenterFragment;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,6 +51,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
         initData(savedInstanceState);
         showFragment();
         initEvent();
@@ -125,6 +130,18 @@ public class MainActivity extends BaseActivity {
         Fragment fragment = fm.findFragmentByTag(fragmentTags.get(currIndex));
         if(fragment != null) {
             fm.beginTransaction().hide(fragment).commit();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe
+    public void onEvent(EventModel model){
+        if (model==EventModel.GO_UPPER_PAGE){
+            finish();
         }
     }
 

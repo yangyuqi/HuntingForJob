@@ -37,6 +37,7 @@
             android:layout_height="match_parent">
 
             <EditText
+                android:textColor="@color/text_normal_gray"
                 android:id="@+id/edt_name"
                 android:paddingLeft="@dimen/space_10"
                 android:textSize="@dimen/text_size_13"
@@ -128,6 +129,7 @@
             android:background="@drawable/user_info_bg">
 
             <TextView
+                android:textColor="@color/text_normal_gray"
                 android:id="@+id/tv_brith"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -171,6 +173,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:textColor="@color/text_normal_gray"
                 android:id="@+id/tv_class"
                 android:paddingLeft="@dimen/space_10"
                 android:textSize="@dimen/text_size_13"
@@ -217,6 +220,7 @@
             android:layout_height="match_parent">
 
             <EditText
+                android:textColor="@color/text_normal_gray"
                 android:id="@+id/edt_zhiwei"
                 android:paddingLeft="@dimen/space_10"
                 android:textSize="@dimen/text_size_13"
@@ -256,6 +260,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:textColor="@color/text_normal_gray"
                 android:id="@+id/edt_money"
                 android:paddingLeft="@dimen/space_10"
                 android:textSize="@dimen/text_size_13"
@@ -305,6 +310,7 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:textColor="@color/text_normal_gray"
                 android:id="@+id/edt_address"
                 android:paddingLeft="@dimen/space_10"
                 android:textSize="@dimen/text_size_13"

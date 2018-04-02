@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -68,8 +67,14 @@ public class UserCenterFragment extends BaseFragment {
     RelativeLayout rlHelp;
     @BindView(R.id.tv_name)
     TextView tvName;
+    @BindView(R.id.ll_show1)
+    LinearLayout llShow1;
+    @BindView(R.id.ll_show2)
+    LinearLayout llShow2;
+    @BindView(R.id.tv_personal)
+    TextView tvPersonal;
     @BindView(R.id.iv_icon)
-    ImageView ivIcon;
+    CircleImageView ivIcon;
 
 
     @Nullable
@@ -97,6 +102,8 @@ public class UserCenterFragment extends BaseFragment {
 
     private void initData() {
         if (!accessToken.equals("")) {
+            llShow1.setVisibility(View.VISIBLE);
+            llShow2.setVisibility(View.GONE);
             Map<String, Object> map = new HashMap<>();
             map.put("accessToken", accessToken);
             OkHttpClientManager.postAsynJson(gson.toJson(map), UrlUtis.USER_INFO_SEE, new OkHttpClientManager.StringCallback() {
@@ -110,11 +117,17 @@ public class UserCenterFragment extends BaseFragment {
                     BaseEntity entity = gson.fromJson(response, BaseEntity.class);
                     if (entity.getCode().equals(PublicUtils.SUCCESS)) {
                         UserInfoSeeBean userInfoSeeBean = gson.fromJson(gson.toJson(entity.getData()), UserInfoSeeBean.class);
-                        Glide.with(mContext).load(userInfoSeeBean.getUser().getPhoto()).placeholder(R.mipmap.touxiangwode).into(ivIcon);
+                        if (userInfoSeeBean.getUser().getPhoto()!=null) {
+                            Glide.with(mContext).load(userInfoSeeBean.getUser().getPhoto()).into(ivIcon);
+                        }
                         tvName.setText(userInfoSeeBean.getUser().getUsername());
+                        tvPersonal.setText(userInfoSeeBean.getUser().getPersonal());
                     }
                 }
             });
+        } else {
+            llShow1.setVisibility(View.GONE);
+            llShow2.setVisibility(View.VISIBLE);
         }
     }
 
@@ -124,10 +137,10 @@ public class UserCenterFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.rl_user, R.id.rl_speak, R.id.rl_collect, R.id.rl_user_info, R.id.rl_set, R.id.rl_secret, R.id.rl_bang_phone, R.id.rl_deliver, R.id.rl_invite, R.id.rl_help})
+    @OnClick({R.id.rl_user, R.id.rl_speak, R.id.rl_collect, R.id.rl_user_info, R.id.rl_set, R.id.rl_secret, R.id.rl_bang_phone, R.id.rl_deliver, R.id.rl_invite, R.id.rl_help, R.id.ll_show2})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.rl_user:
+            case R.id.ll_show2:
                 startActivity(new Intent(mContext, LoginActivity.class));
                 break;
             case R.id.rl_speak:

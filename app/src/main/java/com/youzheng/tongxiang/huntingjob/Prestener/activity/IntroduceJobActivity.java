@@ -18,11 +18,15 @@ import com.youzheng.tongxiang.huntingjob.Model.entity.Job.JobBeanDetails;
 import com.youzheng.tongxiang.huntingjob.Model.request.OkHttpClientManager;
 import com.youzheng.tongxiang.huntingjob.R;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.PublicUtils;
-import com.youzheng.tongxiang.huntingjob.UI.Utils.SharedPreferencesUtils;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.UrlUtis;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -82,8 +86,14 @@ public class IntroduceJobActivity extends BaseActivity {
     LinearLayout llClickShoucan;
     @BindView(R.id.rl_deliver_msg)
     RelativeLayout rlDeliverMsg;
+    @BindView(R.id.tv_send)
+    TextView tvSend;
+    @BindView(R.id.tv_collect)
+    TextView tvCollect;
+    @BindView(R.id.rl_shoucan)
+    RelativeLayout rlShoucan;
 
-    private int id, collect_id, is_delivery ,com_id;
+    private int id, collect_id, is_delivery, com_id;
 
 
     @Override
@@ -119,10 +129,22 @@ public class IntroduceJobActivity extends BaseActivity {
                         if (details.getJobs_nature() != null) {
                             tvWorkStyle.setText(details.getJobs_nature());
                         }
+                        if (details.getIs_delivery() == 0) {
+                            tvSend.setText("投递简历");
+                            rlDeliverMsg.setBackgroundResource(R.drawable.toujian_li_bg);
+                        } else {
+                            tvSend.setText("已投递");
+                            rlDeliverMsg.setBackgroundResource(R.drawable.bg_blue_deeper);
+                        }
+
                         tvExperice.setText(details.getExperience());
                         tvYear.setText(details.getScale());
                         tvTitle.setText(details.getTitle());
-                        tvMoney.setText("" + details.getWage_min() / 1000 + "K" + "-" + details.getWage_max() / 1000 + "K");
+                        if (details.getWage_face()==0) {
+                            tvMoney.setText("" + details.getWage_min() / 1000 + "K" + "-" + details.getWage_max() / 1000 + "K");
+                        }else {
+                            tvMoney.setText("面议");
+                        }
                         Glide.with(mContext).load(details.getCom_logo()).placeholder(R.mipmap.gongsilogo).into(ivCoIcon);
                         tvCoName.setText(details.getName());
                         tvCoType.setText(details.getCompany_type());
@@ -130,13 +152,20 @@ public class IntroduceJobActivity extends BaseActivity {
                         tvCtype.setText(details.getCtype());
                         collect_id = details.getIs_collect();
                         is_delivery = details.getIs_delivery();
+                        lsDetails.loadDataWithBaseURL(null, getNewContent(details.getDescription()), "text/html", "utf-8", null);
                         if (details.getIs_collect() == 0) {
                             ivShoucan.setImageResource(R.mipmap.shoucang4);
+                            rlShoucan.setBackgroundResource(R.drawable.login_bg_rl);
+                            tvCollect.setText("收藏");
+                            tvCollect.setTextColor(mContext.getResources().getColor(R.color.text_red));
                         } else if (details.getIs_collect() == 1) {
                             ivShoucan.setImageResource(R.mipmap.shoucang1);
+                            rlShoucan.setBackgroundResource(R.drawable.bg_blue_deeper);
+                            tvCollect.setText("取消收藏");
+                            tvCollect.setTextColor(mContext.getResources().getColor(R.color.text_white));
                         }
                         com_id = details.getCom_id();
-                    }catch (Exception e){
+                    } catch (Exception e) {
 
                     }
                 }
@@ -150,15 +179,15 @@ public class IntroduceJobActivity extends BaseActivity {
         id = getIntent().getIntExtra("id", 0);
     }
 
-    @OnClick({R.id.btnBack, R.id.iv_see_co, R.id.ll_click_shoucan,R.id.rl_deliver_msg})
+    @OnClick({R.id.btnBack, R.id.iv_see_co, R.id.ll_click_shoucan, R.id.rl_deliver_msg,R.id.rl_see_more})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnBack:
                 finish();
                 break;
             case R.id.iv_see_co:
-                Intent intent = new Intent(mContext,IntroduceCoActivity.class);
-                intent.putExtra("id",com_id);
+                Intent intent = new Intent(mContext, IntroduceCoActivity.class);
+                intent.putExtra("id", com_id);
                 startActivity(intent);
                 break;
             case R.id.ll_click_shoucan:
@@ -182,6 +211,7 @@ public class IntroduceJobActivity extends BaseActivity {
                                 try {
                                     JSONObject object = new JSONObject(gson.toJson(entity.getData()));
                                     collect_id = object.getInt("is_collect");
+                                    initData();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -207,6 +237,7 @@ public class IntroduceJobActivity extends BaseActivity {
                                 try {
                                     JSONObject object = new JSONObject(gson.toJson(entity.getData()));
                                     collect_id = object.getInt("is_collect");
+                                    initData();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -217,13 +248,13 @@ public class IntroduceJobActivity extends BaseActivity {
                 break;
 
             case R.id.rl_deliver_msg:
-                if (is_delivery==1){
+                if (is_delivery == 1) {
                     showToast("您已投递该职位");
-                }else if (is_delivery==0){
-                    Map<String,Object> map = new HashMap<>();
-                    map.put("jid",id);
-                    map.put("rid",rid);
-                    map.put("uid",uid);
+                } else if (is_delivery == 0) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("jid", id);
+                    map.put("rid", rid);
+                    map.put("uid", uid);
                     OkHttpClientManager.postAsynJson(gson.toJson(map), UrlUtis.TOUJIANLI_JOB, new OkHttpClientManager.StringCallback() {
                         @Override
                         public void onFailure(Request request, IOException e) {
@@ -232,12 +263,42 @@ public class IntroduceJobActivity extends BaseActivity {
 
                         @Override
                         public void onResponse(String response) {
-                             BaseEntity entity = gson.fromJson(response,BaseEntity.class);
-                             showToast(entity.getMsg());
+                            BaseEntity entity = gson.fromJson(response, BaseEntity.class);
+                            showToast(entity.getMsg());
+                            initData();
                         }
                     });
                 }
                 break;
+
+            case R.id.rl_see_more :
+                num = 2222 ;
+                Intent intent1 = new Intent(mContext, IntroduceCoActivity.class);
+                intent1.putExtra("id", com_id);
+                startActivity(intent1);
+                break;
+        }
+    }
+
+    private int num ;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().post(num);
+        num = 0 ;
+    }
+
+    private String getNewContent(String htmltext) {
+        try {
+            Document doc = Jsoup.parse(htmltext);
+            Elements elements = doc.getElementsByTag("img");
+            for (Element element : elements) {
+                element.attr("width", "100%").attr("height", "auto");
+            }
+            return doc.toString();
+        } catch (Exception e) {
+            return "";
         }
     }
 }

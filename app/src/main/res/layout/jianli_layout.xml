@@ -42,10 +42,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
+                <com.youzheng.tongxiang.huntingjob.UI.Widget.CircleImageView
                     android:id="@+id/iv_co_icon"
                     android:layout_centerVertical="true"
-                    android:scaleType="fitXY"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@mipmap/touxiangwode"
@@ -64,7 +63,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="刘诗诗"
+                        android:text=""
                         android:textColor="@color/text_black"
                         android:textSize="@dimen/text_size_15"
                         />
@@ -75,14 +74,14 @@
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="女"
+                        android:text=""
                         android:textColor="@color/text_gray"
                         android:textSize="@dimen/text_size_11"
                         />
 
                     <View
-                        android:layout_marginBottom="@dimen/space_5"
-                        android:layout_marginTop="@dimen/space_4"
+                        android:layout_marginBottom="@dimen/space_6"
+                        android:layout_marginTop="@dimen/space_6"
                         android:layout_marginLeft="@dimen/space_15"
                         android:layout_width="@dimen/space_1"
                         android:layout_height="match_parent"
@@ -94,7 +93,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="26"
+                        android:text=""
                         android:textColor="@color/text_gray"
                         android:textSize="@dimen/text_size_11"
                         />
@@ -115,9 +114,9 @@
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="本科"
+                        android:text=""
                         android:textColor="@color/text_black"
-                        android:textSize="@dimen/text_size_15"
+                        android:textSize="@dimen/text_size_14"
                         />
 
                 </LinearLayout>
@@ -138,9 +137,9 @@
                         android:drawablePadding="@dimen/space_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="民营企业"
+                        android:text=""
                         android:textSize="@dimen/text_size_10"
-                        android:drawableLeft="@mipmap/qiyexingzhi"
+                        android:drawableLeft="@mipmap/dianhuua"
                         />
 
                 </LinearLayout>
@@ -161,9 +160,9 @@
                         android:drawablePadding="@dimen/space_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="电子商务"
+                        android:text=""
                         android:textSize="@dimen/text_size_10"
-                        android:drawableLeft="@mipmap/zuobiaoocopy3"
+                        android:drawableLeft="@mipmap/youxiang"
                         />
 
                 </LinearLayout>
@@ -182,9 +181,9 @@
                         android:drawablePadding="@dimen/space_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="电子商务"
+                        android:text=""
                         android:textSize="@dimen/text_size_10"
-                        android:drawableLeft="@mipmap/zuobiaoocopy3"
+                        android:drawableLeft="@mipmap/zhuangtai"
                         />
 
                 </LinearLayout>
@@ -239,7 +238,7 @@
                     android:layout_height="wrap_content">
 
                    <LinearLayout
-                       android:paddingLeft="@dimen/space_30"
+                       android:paddingLeft="@dimen/space_15"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:orientation="vertical"
@@ -329,11 +328,13 @@
 
                 <RelativeLayout
                     android:paddingBottom="@dimen/space_15"
-                    android:paddingTop="@dimen/space_10"
+                    android:paddingTop="@dimen/space_15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:paddingBottom="@dimen/space_3"
+                        android:paddingTop="@dimen/space_3"
                         android:id="@+id/tv_experience"
                         android:drawablePadding="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
@@ -346,6 +347,7 @@
                         />
 
                     <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                        android:paddingBottom="@dimen/space_10"
                         android:layout_marginLeft="@dimen/space_8"
                         android:divider="@null"
                         android:layout_width="match_parent"
@@ -401,12 +403,14 @@
                     android:background="@color/text_gray"/>
 
                 <RelativeLayout
-                    android:paddingBottom="@dimen/space_20"
-                    android:paddingTop="@dimen/space_20"
+                    android:paddingBottom="@dimen/space_15"
+                    android:paddingTop="@dimen/space_15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:paddingBottom="@dimen/space_3"
+                        android:paddingTop="@dimen/space_3"
                         android:id="@+id/tv_project"
                         android:drawablePadding="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
@@ -419,6 +423,7 @@
                         />
 
                     <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                        android:paddingBottom="@dimen/space_10"
                         android:layout_marginLeft="@dimen/space_8"
                         android:divider="@null"
                         android:layout_width="match_parent"
@@ -472,12 +477,14 @@
                     android:background="@color/text_gray"/>
 
                 <RelativeLayout
-                    android:paddingBottom="@dimen/space_20"
-                    android:paddingTop="@dimen/space_20"
+                    android:paddingBottom="@dimen/space_15"
+                    android:paddingTop="@dimen/space_15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:paddingBottom="@dimen/space_3"
+                        android:paddingTop="@dimen/space_3"
                         android:id="@+id/tv_jiaoyue"
                         android:drawablePadding="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
@@ -490,6 +497,7 @@
                         />
 
                     <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                        android:paddingBottom="@dimen/space_10"
                         android:layout_marginLeft="@dimen/space_8"
                         android:divider="@null"
                         android:layout_width="match_parent"
@@ -543,8 +551,8 @@
                     android:background="@color/text_gray"/>
 
                 <RelativeLayout
-                    android:paddingBottom="@dimen/space_20"
-                    android:paddingTop="@dimen/space_20"
+                    android:paddingBottom="@dimen/space_15"
+                    android:paddingTop="@dimen/space_15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -561,15 +569,14 @@
                         />
 
                     <com.donkingliang.labels.LabelsView
-                        android:paddingBottom="@dimen/space_15"
+                        android:paddingBottom="@dimen/space_10"
                         android:layout_marginRight="@dimen/space_10"
-                        android:layout_marginLeft="@dimen/space_10"
+                        android:layout_marginLeft="@dimen/space_13"
                         android:id="@+id/labelView"
-                        android:layout_marginTop="@dimen/space_10"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:labelBackground="@drawable/label_bg"
-                        app:labelTextColor="@drawable/label_text_color"
+                        app:labelBackground="@drawable/label_bg_gray"
+                        app:labelTextColor="@color/text_gray"
                         app:labelTextSize="11sp"
                         app:labelTextPaddingBottom="5dp"
                         app:labelTextPaddingLeft="10dp"
@@ -629,8 +636,8 @@
                     android:background="@color/text_gray"/>
 
                 <RelativeLayout
-                    android:paddingBottom="@dimen/space_10"
-                    android:paddingTop="@dimen/space_10"
+                    android:paddingBottom="@dimen/space_15"
+                    android:paddingTop="@dimen/space_15"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -652,7 +659,7 @@
                         android:textSize="@dimen/text_size_12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="尚未填写信息,完善信息可提高应聘几率~"
+                        android:text=""
                         android:textColor="@color/text_gray"
                         />
 

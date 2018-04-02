@@ -63,6 +63,7 @@
                     android:background="@drawable/user_info_bg">
 
                     <EditText
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/edt_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -98,6 +99,7 @@
                     android:background="@drawable/user_info_bg">
 
                     <TextView
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/tv_brith"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -195,6 +197,7 @@
                     android:background="@drawable/user_info_bg">
 
                     <EditText
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/edt_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -232,6 +235,7 @@
                     android:background="@drawable/user_info_bg">
 
                     <EditText
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -267,8 +271,11 @@
                     android:background="@drawable/user_info_bg">
 
                     <TextView
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/tv_city"
-                        android:layout_width="wrap_content"
+                        android:layout_toLeftOf="@+id/iv_city_address"
+                        android:gravity="start"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:paddingLeft="@dimen/space_10"
@@ -309,8 +316,11 @@
                     android:background="@drawable/user_info_bg">
 
                     <TextView
+                        android:gravity="start"
+                        android:layout_toLeftOf="@+id/iv_status"
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/tv_status"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:paddingLeft="@dimen/space_10"
@@ -351,6 +361,8 @@
                     android:background="@drawable/user_info_bg">
 
                     <EditText
+                        android:paddingRight="@dimen/space_10"
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/edt_zhiwei"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -387,6 +399,9 @@
                     android:background="@drawable/user_info_bg">
 
                     <TextView
+                        android:gravity="start"
+                        android:layout_toLeftOf="@+id/iv_money"
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/edt_money"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -432,6 +447,9 @@
                     android:background="@drawable/user_info_bg">
 
                     <TextView
+                        android:layout_toLeftOf="@+id/iv_address"
+                        android:gravity="start"
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/edt_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -477,8 +495,11 @@
                     android:background="@drawable/user_info_bg">
 
                     <TextView
+                        android:gravity="start"
+                        android:layout_toLeftOf="@+id/iv_hangye"
+                        android:textColor="@color/text_normal_gray"
                         android:id="@+id/tv_hangye"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:paddingLeft="@dimen/space_10"

@@ -71,6 +71,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
+                        android:textColor="@color/text_normal_gray"
                         android:background="@null"
                         android:id="@+id/tv_city"
                         android:paddingLeft="@dimen/space_10"
@@ -92,6 +93,7 @@
                 android:layout_height="40dp">
 
                 <TextView
+
                     android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -107,11 +109,14 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:textColor="@color/text_normal_gray"
+                        android:gravity="start"
+                        android:layout_toLeftOf="@+id/iv_iocn"
                         android:id="@+id/tv_use_deeper"
                         android:paddingLeft="@dimen/space_10"
                         android:textSize="@dimen/text_size_13"
                         android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
 

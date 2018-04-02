@@ -12,8 +12,10 @@
         android:layout_height="match_parent">
 
     <LinearLayout
+        android:layout_marginBottom="@dimen/space_10"
+        android:layout_above="@+id/ll_bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         >
 
@@ -307,6 +309,7 @@
             />
 
 
+
         <WebView
             android:id="@+id/ls_details"
             android:layout_width="match_parent"
@@ -317,12 +320,14 @@
 </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_bottom"
             android:background="@color/text_white"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="45dp">
             
             <RelativeLayout
+                android:id="@+id/rl_shoucan"
                 android:layout_marginLeft="@dimen/space_10"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/login_bg_rl"
@@ -347,6 +352,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_collect"
                         android:layout_marginLeft="@dimen/space_5"
                         android:textSize="@dimen/text_size_15"
                         android:drawablePadding="@dimen/space_5"
@@ -372,6 +378,7 @@
                 android:layout_height="35dp">
 
                 <TextView
+                    android:id="@+id/tv_send"
                     android:layout_centerInParent="true"
                     android:textSize="@dimen/text_size_15"
                     android:drawablePadding="@dimen/space_5"

@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/rl_bg"
         android:layout_width="match_parent"
         android:layout_height="135dp"
         android:background="@mipmap/groweup"
@@ -30,7 +31,7 @@
 
 
         <LinearLayout
-            android:layout_toLeftOf="@+id/iv_hong"
+            android:layout_toLeftOf="@+id/rl_hong"
             android:orientation="horizontal"
             android:paddingBottom="@dimen/space_15"
             android:paddingTop="@dimen/space_15"
@@ -40,6 +41,7 @@
             android:layout_height="match_parent">
 
         <LinearLayout
+
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -121,6 +123,27 @@
 
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_alignParentRight="true"
+            android:id="@+id/rl_hong"
+            android:scaleType="fitXY"
+            android:background="@mipmap/mianshiyaoqing"
+            android:layout_width="28dp"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:paddingLeft="@dimen/space_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/text_white"
+                android:text="面试邀请"
+                android:textSize="@dimen/text_size_10"
+                />
+
+        </RelativeLayout>
 
     </RelativeLayout>
     <View

@@ -28,6 +28,7 @@ import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.EducationBean;
 import com.youzheng.tongxiang.huntingjob.Model.entity.jianli.UserBaseBean;
 import com.youzheng.tongxiang.huntingjob.Model.entity.user.UserBean;
 import com.youzheng.tongxiang.huntingjob.Model.request.OkHttpClientManager;
+import com.youzheng.tongxiang.huntingjob.Prestener.activity.FillInfoActivity;
 import com.youzheng.tongxiang.huntingjob.Prestener.fragment.BaseFragment;
 import com.youzheng.tongxiang.huntingjob.R;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.PublicUtils;
@@ -154,6 +155,7 @@ public class UserInfoTwoPageFragment extends BaseFragment {
                                 int rid = object.getInt("rid");
                                 SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.rid,rid);
                                 mContext.startActivity(new Intent(mContext, MainActivity.class));
+                                ((FillInfoActivity)mContext).finish();
 //                                dologin();
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -275,7 +277,7 @@ public class UserInfoTwoPageFragment extends BaseFragment {
     private void initTime() {
         DatePickDialog dialog = new DatePickDialog(mContext);
         //设置上下年分限制
-        dialog.setYearLimt(30);
+        dialog.setYearLimt(80);
         //设置标题
         dialog.setTitle("选择时间");
         //设置类型

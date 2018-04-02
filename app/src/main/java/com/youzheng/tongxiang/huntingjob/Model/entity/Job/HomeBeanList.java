@@ -8,6 +8,15 @@ import java.util.List;
 
 public class HomeBeanList {
     private List<JobBeanDetails> jobList ;
+    private List<CoBeanDetails> comList ;
+
+    public List<CoBeanDetails> getComList() {
+        return comList;
+    }
+
+    public void setComList(List<CoBeanDetails> comList) {
+        this.comList = comList;
+    }
 
     public List<JobBeanDetails> getJobList() {
         return jobList;

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:background="@color/bg_all"
@@ -18,9 +18,12 @@
         android:layout_height="wrap_content"></WebView>
 
     <LinearLayout
+        android:paddingTop="@dimen/space_10"
         android:orientation="vertical"
         android:background="@color/text_white"
-        android:padding="@dimen/space_10"
+        android:paddingLeft="@dimen/space_10"
+        android:paddingRight="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -89,7 +92,7 @@
 
         <TextView
             android:layout_marginTop="@dimen/space_7"
-            android:text="上海上海上海上海上海上海上海上海"
+            android:text=""
             android:textSize="@dimen/text_size_12"
             android:textColor="@color/text_gray"
             android:id="@+id/tv_address"
@@ -98,5 +101,7 @@
 
 
     </LinearLayout>
+
+
     </LinearLayout>
 </ScrollView>

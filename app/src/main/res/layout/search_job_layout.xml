@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
         
@@ -100,11 +102,12 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent">
                     <TextView
-                        android:textSize="@dimen/text_size_12"
+                        android:id="@+id/tv_jingyan"
+                        android:textSize="@dimen/text_size_11"
                         android:drawablePadding="@dimen/space_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="行业筛选"
+                        android:text="工作经验"
                         android:textColor="@color/text_white"
                         android:gravity="center"
                         android:drawableRight="@mipmap/xialasanjiao"
@@ -112,17 +115,19 @@
                         android:layout_centerHorizontal="true" />
                 </RelativeLayout>
                     <RelativeLayout
+                        android:id="@+id/rl_work_self"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         >
                     <TextView
-                        android:textSize="@dimen/text_size_12"
+                        android:id="@+id/tv_self"
+                        android:textSize="@dimen/text_size_11"
                         android:drawablePadding="@dimen/space_3"
                         android:layout_centerInParent="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="全桐乡"
+                        android:text="工作性质"
                         android:textColor="@color/text_white"
                         android:gravity="center"
                         android:drawableRight="@mipmap/xialasanjiao"
@@ -136,7 +141,9 @@
                         android:layout_height="match_parent">
 
                     <TextView
-                        android:textSize="@dimen/text_size_12"
+                        android:singleLine="true"
+                        android:id="@+id/tv_money"
+                        android:textSize="@dimen/text_size_11"
                         android:drawablePadding="@dimen/space_3"
                         android:layout_centerInParent="true"
                         android:layout_width="wrap_content"
@@ -148,17 +155,19 @@
                         />
                 </RelativeLayout>
                     <RelativeLayout
+                        android:id="@+id/rl_xueli"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         >
                     <TextView
-                        android:textSize="@dimen/text_size_12"
+                        android:id="@+id/tv_xueli"
+                        android:textSize="@dimen/text_size_11"
                         android:drawablePadding="@dimen/space_3"
                         android:layout_centerInParent="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="其他要求"
+                        android:text="学历"
                         android:textColor="@color/text_white"
                         android:gravity="center"
                         android:drawableRight="@mipmap/xialasanjiao"
@@ -168,21 +177,24 @@
 
             </RelativeLayout>
 
-            <ScrollView
+            <com.liaoinstan.springview.widget.SpringView
                 android:layout_marginTop="@dimen/space_10"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:type="follow"
+                android:id="@+id/sv"
+                app:footer="@layout/default_footer"
+                >
 
-            <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+            <ListView
                 android:layout_marginTop="@dimen/space_10"
                 android:divider="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ls"
-                ></com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView>
+                ></ListView>
 
-    </ScrollView>
-
+        </com.liaoinstan.springview.widget.SpringView>
         </LinearLayout>
 
 
@@ -200,6 +212,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     <ImageView
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@mipmap/toujianli1"

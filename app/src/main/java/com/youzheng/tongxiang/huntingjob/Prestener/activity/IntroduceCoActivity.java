@@ -22,6 +22,9 @@ import com.youzheng.tongxiang.huntingjob.R;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.PublicUtils;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.UrlUtis;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +56,7 @@ public class IntroduceCoActivity extends BaseActivity {
     @BindView(R.id.tv_businness)
     TextView tvBusinness;
 
-    private int com_id;
+    public  int com_id;
 
     private List<Fragment> list = new ArrayList<>();
     private MyFragmentPagerAdapter adapter;
@@ -66,7 +69,7 @@ public class IntroduceCoActivity extends BaseActivity {
         setContentView(R.layout.introduce_co_layout);
         ButterKnife.bind(this);
         initView();
-
+        EventBus.getDefault().register(this);
         com_id = getIntent().getIntExtra("id", 0);
 
         initData();
@@ -91,7 +94,7 @@ public class IntroduceCoActivity extends BaseActivity {
                     tvCtype.setText(bean.getCompany().getCtypeName());
                     tvCoNum.setText(bean.getCompany().getScaleName());
                     tvBusinness.setText(bean.getCompany().getTradeName());
-
+                    EventBus.getDefault().post(bean.getCompany());
                 }
             }
         });
@@ -140,6 +143,19 @@ public class IntroduceCoActivity extends BaseActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return titles[position];
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe
+    public void onEvent(Integer integer){
+        if (integer==2222){
+            viewPage.setCurrentItem(1);
         }
     }
 }

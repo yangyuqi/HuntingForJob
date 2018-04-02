@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -18,12 +19,21 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.okhttp.Request;
+import com.youzheng.tongxiang.huntingjob.Model.Event.BaseEntity;
+import com.youzheng.tongxiang.huntingjob.Model.entity.Job.OccupationList;
+import com.youzheng.tongxiang.huntingjob.Model.entity.Job.OccupationListBean;
+import com.youzheng.tongxiang.huntingjob.Model.request.OkHttpClientManager;
 import com.youzheng.tongxiang.huntingjob.Prestener.activity.SearchJobActivity;
 import com.youzheng.tongxiang.huntingjob.R;
 import com.youzheng.tongxiang.huntingjob.UI.Adapter.CommonAdapter;
 import com.youzheng.tongxiang.huntingjob.UI.Adapter.ViewHolder;
+import com.youzheng.tongxiang.huntingjob.UI.Utils.PublicUtils;
+import com.youzheng.tongxiang.huntingjob.UI.Utils.UrlUtis;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,7 +65,8 @@ public class CategoryFragment extends BaseFragment {
     @BindView(R.id.ls_three)
     ListView lsThree;
 
-    private CommonAdapter<String> adapter ;
+    private CommonAdapter<OccupationListBean> adapter ;
+    private List<OccupationListBean> data = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,64 +105,103 @@ public class CategoryFragment extends BaseFragment {
             layoutHeader.setVisibility(View.GONE);
         }
         llDrawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        for (int i = 0; i < 15; i++) {
-            RadioButton tempButton = new RadioButton(mContext);
-            tempButton.setBackgroundResource(R.drawable.category_bg_item);   // 设置RadioButton的背景图片
-            tempButton.setButtonDrawable(R.drawable.drawable_category_item);           // 设置按钮的样式
-            tempButton.setPadding(80, 0, 0, 0);                 // 设置文字距离按钮四周的距离
-            tempButton.setText("按钮 " + i);
-            tempButton.setTextColor(mContext.getResources().getColorStateList(R.color.category_text_color));
-            rgOne.addView(tempButton, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            tempButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    llDrawer.openDrawer(GravityCompat.END);
-                    for (int i = 0; i < 15; i++) {
-                        RadioButton tempButton = new RadioButton(mContext);
-                        tempButton.setBackgroundResource(R.drawable.category_bg_item2);
-                        tempButton.setButtonDrawable(R.drawable.drawable_category_item2);
-                        tempButton.setPadding(80, 0, 0, 0);
-                        tempButton.setText("二级按钮 " + i);
-                        tempButton.setTextColor(mContext.getResources().getColorStateList(R.color.category_text_color));
-                        rgTwo.addView(tempButton, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                        if (i == 0) {
-                            tempButton.setChecked(true);
-                        }
-                    }
-                }
-            });
-        }
-
-        rgTwo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                List<String> data = new ArrayList<String>();
-                for (int j = 0; j < 15; j++) {
-                    data.add("三级按钮 " + i);
-                }
-                adapter = new CommonAdapter<String>(mContext,data,R.layout.three_category_item) {
-                    @Override
-                    public void convert(final ViewHolder helper, String item) {
-                        helper.setText(R.id.tv_name,item);
-                        helper.getView(R.id.tv_name).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                helper.getView(R.id.iv_show).setVisibility(View.VISIBLE);
-                                startActivity(new Intent(mContext, SearchJobActivity.class));
-                            }
-                        });
-                    }
-                };
-
-                lsThree.setAdapter(adapter);
-            }
-        });
 
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        initData();
+    }
+
+    private void initData() {
+        OkHttpClientManager.postAsynJson(gson.toJson(new HashMap<>()), UrlUtis.GET_ALL_CATEGORY, new OkHttpClientManager.StringCallback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(String response) {
+                BaseEntity entity = gson.fromJson(response,BaseEntity.class);
+                if (entity.getCode().equals(PublicUtils.SUCCESS)){
+                    final OccupationList list = gson.fromJson(gson.toJson(entity.getData()),OccupationList.class);
+                    for (int i = 0 ;i<list.getOccupationList().size();i++){
+                        RadioButton tempButton = new RadioButton(mContext);
+                        tempButton.setBackgroundResource(R.drawable.category_bg_item);   // 设置RadioButton的背景图片
+                        tempButton.setButtonDrawable(R.drawable.drawable_category_item);           // 设置按钮的样式
+                        tempButton.setPadding(80, 0, 0, 0);                 // 设置文字距离按钮四周的距离
+                        tempButton.setText(list.getOccupationList().get(i).getOccupationName());
+                        tempButton.setTextColor(mContext.getResources().getColorStateList(R.color.category_text_color));
+                        rgOne.addView(tempButton, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        final int finalI = i;
+                        tempButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                llDrawer.openDrawer(GravityCompat.END);
+                                rgTwo.removeAllViews();
+                                for (int j = 0; j < list.getOccupationList().get(finalI).getChilds().size(); j++) {
+                                    RadioButton tempButton = new RadioButton(mContext);
+                                    tempButton.setBackgroundResource(R.drawable.category_bg_item2);
+                                    tempButton.setButtonDrawable(R.drawable.drawable_category_item2);
+                                    tempButton.setPadding(80, 0, 0, 0);
+                                    tempButton.setText(list.getOccupationList().get(finalI).getChilds().get(j).getOccupationName());
+                                    tempButton.setTextColor(mContext.getResources().getColorStateList(R.color.category_text_color));
+                                    rgTwo.addView(tempButton, LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                    final int m = j ;
+                                    if (j==0){
+                                        tempButton.setChecked(true);
+                                        adapter = new CommonAdapter<OccupationListBean>(mContext,list.getOccupationList().get(finalI).getChilds().get(m).getChilds(),R.layout.three_category_item) {
+                                            @Override
+                                            public void convert(ViewHolder helper, final OccupationListBean item) {
+                                                helper.setText(R.id.tv_name,item.getOccupationName());
+                                                helper.getConvertView().setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        Intent intent = new Intent(mContext,SearchJobActivity.class);
+                                                        intent.putExtra("keyWord",item.getOccupationName());
+                                                        startActivity(intent);
+                                                    }
+                                                });
+                                            }
+                                        };
+                                        lsThree.setAdapter(adapter);
+                                    }
+
+                                    tempButton.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            adapter = new CommonAdapter<OccupationListBean>(mContext,list.getOccupationList().get(finalI).getChilds().get(m).getChilds(),R.layout.three_category_item) {
+                                                @Override
+                                                public void convert(ViewHolder helper, final OccupationListBean item) {
+                                                    helper.setText(R.id.tv_name,item.getOccupationName());
+                                                    helper.getConvertView().setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            Intent intent = new Intent(mContext,SearchJobActivity.class);
+                                                            intent.putExtra("keyWord",item.getOccupationName());
+                                                            startActivity(intent);
+                                                        }
+                                                    });
+                                                }
+                                            };
+                                            lsThree.setAdapter(adapter);
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        llDrawer.closeDrawers();
     }
 
     @Override

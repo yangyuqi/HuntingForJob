@@ -30,6 +30,7 @@
         />
 
     <TextView
+        android:visibility="invisible"
         android:id="@+id/tv_co"
         android:layout_marginTop="@dimen/space_30"
         android:drawablePadding="@dimen/space_20"

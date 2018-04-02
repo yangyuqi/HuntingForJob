@@ -38,6 +38,16 @@ public class JobBeanDetails {
     private String com_logo ;
     private String jobType ;
 
+    private String trade ;
+
+    public String getTrade() {
+        return trade;
+    }
+
+    public void setTrade(String trade) {
+        this.trade = trade;
+    }
+
     public String getJobType() {
         return jobType;
     }

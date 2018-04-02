@@ -20,6 +20,24 @@ public class DeliverBean {
     private int id ;
     private double wage_min ;
     private int status ;
+    private int wage_face ;
+    private String tradeName ;
+
+    public String getTradeName() {
+        return tradeName;
+    }
+
+    public void setTradeName(String tradeName) {
+        this.tradeName = tradeName;
+    }
+
+    public int getWage_face() {
+        return wage_face;
+    }
+
+    public void setWage_face(int wage_face) {
+        this.wage_face = wage_face;
+    }
 
     public String getEducation() {
         return education;

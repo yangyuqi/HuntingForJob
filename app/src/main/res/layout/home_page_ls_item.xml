@@ -10,7 +10,7 @@
         android:layout_height="135dp"
         android:background="@mipmap/groweup"
         >
-        <ImageView
+        <com.youzheng.tongxiang.huntingjob.UI.Widget.CircleImageView
             android:id="@+id/iv_logo"
             android:layout_marginLeft="@dimen/space_20"
             android:layout_width="40dp"

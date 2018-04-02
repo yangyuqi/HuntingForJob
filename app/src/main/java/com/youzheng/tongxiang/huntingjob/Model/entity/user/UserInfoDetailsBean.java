@@ -12,6 +12,34 @@ public class UserInfoDetailsBean {
     private int authentication ;
     private String photo ;
 
+    private String  personal ;
+    private String hidetype ;
+    private int display ;
+
+    public String getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(String personal) {
+        this.personal = personal;
+    }
+
+    public String getHidetype() {
+        return hidetype;
+    }
+
+    public void setHidetype(String hidetype) {
+        this.hidetype = hidetype;
+    }
+
+    public int getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(int display) {
+        this.display = display;
+    }
+
     public String getUsername() {
         return username;
     }

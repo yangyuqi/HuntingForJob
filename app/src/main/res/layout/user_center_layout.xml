@@ -40,16 +40,16 @@
             android:layout_width="match_parent"
             android:layout_height="130dp">
 
-            <ImageView
+            <com.youzheng.tongxiang.huntingjob.UI.Widget.CircleImageView
                 android:layout_centerVertical="true"
                 android:id="@+id/iv_icon"
-                android:scaleType="fitXY"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
                 android:src="@mipmap/touxiangwode"
                 />
 
             <LinearLayout
+                android:id="@+id/ll_show1"
                 android:layout_marginLeft="@dimen/space_30"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/iv_icon"
@@ -62,18 +62,41 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="刘诗诗"
+                    android:text=""
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/text_size_17"
                     />
 
                 <TextView
+                    android:id="@+id/tv_personal"
                     android:layout_marginTop="@dimen/space_10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="热爱设计,热爱生活"
+                    android:text=""
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/text_size_14"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:id="@+id/ll_show2"
+                android:layout_marginLeft="@dimen/space_30"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/iv_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:background="@color/text_white"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="暂未登录,点击登录"
+                    android:textSize="14sp"
+                    android:gravity="center"
                     />
 
             </LinearLayout>
@@ -317,12 +340,13 @@
         <LinearLayout
             android:background="@mipmap/groweup"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="52dp"
             android:layout_marginTop="8dp"
             android:orientation="vertical"
             >
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_help"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
@@ -351,6 +375,7 @@
             </RelativeLayout>
 
             <View
+                android:visibility="gone"
                 android:layout_marginRight="@dimen/space_18"
                 android:layout_marginLeft="@dimen/space_25"
                 android:layout_width="match_parent"

@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import com.squareup.okhttp.Request;
 import com.youzheng.tongxiang.huntingjob.Model.Event.BaseEntity;
+import com.youzheng.tongxiang.huntingjob.Model.Event.EventModel;
 import com.youzheng.tongxiang.huntingjob.Model.request.OkHttpClientManager;
 import com.youzheng.tongxiang.huntingjob.Prestener.activity.BaseActivity;
 import com.youzheng.tongxiang.huntingjob.Prestener.activity.FindPwdActivity;
+import com.youzheng.tongxiang.huntingjob.Prestener.activity.H5Activity;
 import com.youzheng.tongxiang.huntingjob.Prestener.activity.LoginActivity;
 import com.youzheng.tongxiang.huntingjob.R;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.PublicUtils;
@@ -21,6 +23,8 @@ import com.youzheng.tongxiang.huntingjob.UI.Utils.SharedPreferencesUtils;
 import com.youzheng.tongxiang.huntingjob.UI.Utils.UrlUtis;
 import com.youzheng.tongxiang.huntingjob.UI.dialog.DeleteDialog;
 import com.youzheng.tongxiang.huntingjob.UI.dialog.DeleteDialogInterface;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -79,14 +83,15 @@ public class SetAppActivity extends BaseActivity {
     public void OnClick(View view){
         switch (view.getId()){
             case R.id.rl_change_pwd:
-                startActivity(new Intent(mContext, FindPwdActivity.class));
+                Intent intent = new Intent(mContext, FindPwdActivity.class);
+                intent.putExtra("type","1");
+                startActivity(intent);
                 break;
             case R.id.rl_update_version:
                 break;
             case R.id.rl_share:
                 break;
-            case R.id.rl_about_us:
-                break;
+
             case R.id.rl_out_login:
 
                 DeleteDialog deleteDialog = new DeleteDialog(mContext,"提示","是否退出登录","确定");
@@ -109,7 +114,9 @@ public class SetAppActivity extends BaseActivity {
                                     if (entity.getCode().equals(PublicUtils.SUCCESS)){
                                         finish();
                                         SharedPreferencesUtils.clear(mContext);
+                                        SharedPreferencesUtils.setParam(mContext,SharedPreferencesUtils.fiet,1);
                                         startActivity(new Intent(mContext, LoginActivity.class));
+                                        EventBus.getDefault().post(EventModel.GO_UPPER_PAGE);
                                     }
                                 }
                             });
@@ -117,6 +124,14 @@ public class SetAppActivity extends BaseActivity {
                     }
                 });
                 deleteDialog.show();
+                break;
+            case R.id.rl_about_us :
+                Intent intent1 = new Intent(mContext, H5Activity.class);
+                intent1.putExtra("title","关于我们");
+                intent1.putExtra("content","优聘人才网（www.youpin.com \n" +
+                        "\n" +
+                        "），是优正管理咨询股份有限公司旗下，于2011年正式上线。作为实现企业、猎头和职业经理人三方互动的平台，猎聘网始终专注于打造以经理人个人用户体验为核心，全面颠覆传统网络招聘以企业为核心的广告发布。截至2016年6月，猎聘网拥有超过3000万的注册会员，已服务超过50万家优质企业。目前，有超过25万名猎头在猎聘网上寻找核心岗位的候选人。猎聘网的业务遍及中国北京、上海、广州、深圳、天津、大连、杭州、南京、武汉、厦门、成都、青岛、重庆、郑州等十余个城市。");
+                startActivity(intent1);
                 break;
         }
     }

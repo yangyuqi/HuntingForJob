@@ -68,29 +68,33 @@
         >
 
         <TextView
-            android:drawableTop="@mipmap/xiaoyuanzhaopin"
+            android:id="@+id/tv_shoucang"
+            android:drawableTop="@mipmap/zhaopinhui"
             style="@style/text_style"
-            android:text="招聘会"
+            android:text="收藏夹"
              />
         <TextView
+            android:id="@+id/tv_deliever"
             android:drawableTop="@mipmap/renshikaoshi"
-            android:text="人事考试"
-            style="@style/text_style"
-            />
-        <TextView
-            android:drawableTop="@mipmap/redianzixun"
-            android:text="热点资讯"
-            style="@style/text_style"
-            />
-        <TextView
-            android:drawableTop="@mipmap/zhanzhangtongji"
-            android:text="站点统计"
+            android:text="投递箱"
             style="@style/text_style"
             />
         <TextView
             android:id="@+id/iv_go2"
             android:drawableTop="@mipmap/xiaoyuanzhaopin"
             android:text="校园招聘"
+            style="@style/text_style"
+            />
+        <TextView
+            android:id="@+id/tv_hot_news"
+            android:drawableTop="@mipmap/redianzixun"
+            android:text="热点咨询"
+            style="@style/text_style"
+            />
+        <TextView
+            android:id="@+id/tv_consule"
+            android:drawableTop="@mipmap/qiuzhizixun"
+            android:text="职场干货"
             style="@style/text_style"
             />
 
@@ -175,8 +179,10 @@
                                 android:layout_weight="1">
 
                                 <TextView
+                                    android:gravity="start"
+                                    android:layout_toLeftOf="@+id/tv_money"
                                     android:id="@+id/tv_home_name"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="@dimen/space_3"
                                     android:text="软件测试工程师"
@@ -184,6 +190,7 @@
                                     android:textSize="@dimen/text_size_13" />
 
                                 <TextView
+                                    android:layout_marginLeft="@dimen/space_3"
                                     android:id="@+id/tv_money"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -193,6 +200,7 @@
                                     android:textColor="@color/text_red" />
 
                                 <TextView
+                                    android:singleLine="true"
                                     android:id="@+id/tv_mm"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -206,14 +214,14 @@
                             </RelativeLayout>
 
                             <View
-                                android:layout_marginTop="@dimen/space_10"
+                                android:layout_marginTop="@dimen/space_5"
                                 android:layout_marginRight="@dimen/space_30"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/space_divider_1"
                                 android:background="@color/text_gray"/>
 
                             <RelativeLayout
-                                android:layout_marginTop="@dimen/space_10"
+                                android:layout_marginTop="@dimen/space_5"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -231,6 +239,7 @@
 
 
                                 <TextView
+                                    android:singleLine="true"
                                     android:id="@+id/tv_below"
                                     android:layout_marginLeft="@dimen/space_3"
                                     android:textSize="@dimen/text_size_11"
@@ -274,9 +283,11 @@
                                 android:layout_weight="1"
                                 >
                                 <TextView
+                                    android:layout_toLeftOf="@+id/tv_tv_money"
                                     android:layout_marginLeft="@dimen/space_3"
                                     android:id="@+id/tv_name"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
+                                    android:gravity="start"
                                     android:layout_height="wrap_content"
                                     android:textSize="@dimen/text_size_13"
                                     android:text="软件测试工程师"
@@ -284,6 +295,7 @@
                                     />
 
                                 <TextView
+                                    android:layout_marginLeft="@dimen/space_3"
                                     android:id="@+id/tv_tv_money"
                                     android:layout_marginRight="@dimen/space_10"
                                     android:textColor="@color/text_red"
@@ -294,6 +306,7 @@
                                     />
 
                                 <TextView
+                                    android:singleLine="true"
                                     android:id="@+id/tv_mmm"
                                     android:layout_below="@+id/tv_name"
                                     android:layout_marginTop="@dimen/space_8"
@@ -306,14 +319,14 @@
 
                             </RelativeLayout>
                             <View
-                                android:layout_marginTop="@dimen/space_10"
+                                android:layout_marginTop="@dimen/space_5"
                                 android:layout_marginRight="@dimen/space_30"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/space_divider_1"
                                 android:background="@color/text_gray"/>
 
                             <RelativeLayout
-                                android:layout_marginTop="@dimen/space_10"
+                                android:layout_marginTop="@dimen/space_5"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
                                 android:layout_weight="1"
@@ -331,6 +344,7 @@
 
 
                                 <TextView
+                                    android:singleLine="true"
                                     android:id="@+id/tv_below_below"
                                     android:layout_marginLeft="@dimen/space_3"
                                     android:textSize="@dimen/text_size_10"
@@ -525,6 +539,7 @@
             </RelativeLayout>
 
             <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                android:layout_marginTop="@dimen/space_5"
                 android:divider="@null"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -596,6 +611,72 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/ls"
+                ></com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/text_white"
+            android:layout_marginTop="@dimen/space_10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                >
+                <TextView
+                    android:drawablePadding="@dimen/space_5"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/tv_new_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NEW"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/text_size_14"
+                    android:drawableLeft="@mipmap/zuixinzhiwei"
+                    />
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_new_name"
+                    android:text="最新职位"
+                    android:textSize="@dimen/text_size_14"
+
+                    />
+
+                <View
+                    android:layout_marginRight="@dimen/space_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_divider_2"
+                    android:background="@color/text_red"
+                    android:layout_alignParentBottom="true"
+                    />
+
+                <TextView
+                    android:paddingRight="@dimen/space_15"
+                    android:paddingLeft="@dimen/space_20"
+                    android:id="@+id/tv_more5"
+                    android:textColor="#878787"
+                    android:textSize="@dimen/text_size_11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="更多"
+                    />
+
+            </RelativeLayout>
+
+            <com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView
+                android:layout_marginTop="@dimen/space_10"
+                android:divider="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ls_new"
                 ></com.youzheng.tongxiang.huntingjob.UI.Widget.NoScrollListView>
 
         </LinearLayout>

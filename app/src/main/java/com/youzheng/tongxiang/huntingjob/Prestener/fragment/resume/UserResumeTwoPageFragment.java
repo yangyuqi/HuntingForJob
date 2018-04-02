@@ -2,6 +2,7 @@ package com.youzheng.tongxiang.huntingjob.Prestener.fragment.resume;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,6 +126,7 @@ public class UserResumeTwoPageFragment extends BaseFragment {
                     edtDesc.setText(bean.getDescription());
                     tvCity.setText(bean.getScale());
                     hangye_id = bean.getTradeid();
+                    co_id = bean.getScaleid();
                 }
 
                 textHeadNext.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +140,7 @@ public class UserResumeTwoPageFragment extends BaseFragment {
                         map.put("trade", hangye_id);
                         map.put("scale", co_id);
                         map.put("reid", id);
+                        map.put("position",edtPosition.getText().toString());
                         map.put("description", edtDesc.getText().toString());
                         map.put("flag", "1");
                         OkHttpClientManager.postAsynJson(gson.toJson(map), UrlUtis.UPDATE_EXPERENCE, new OkHttpClientManager.StringCallback() {

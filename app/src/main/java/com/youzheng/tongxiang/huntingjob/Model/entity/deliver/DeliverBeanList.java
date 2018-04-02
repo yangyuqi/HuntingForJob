@@ -9,6 +9,17 @@ import java.util.List;
 public class DeliverBeanList {
     private List<DeliverBean> deliveryList ;
 
+    private int count ;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+
     public List<DeliverBean> getDeliveryList() {
         return deliveryList;
     }

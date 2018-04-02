@@ -100,13 +100,25 @@ public class CollectActivity extends BaseActivity {
             @Override
             public void convert(ViewHolder helper, final JobBeanDetails item) {
                 helper.setText(R.id.tv_name,item.getTitle());
-                helper.setText(R.id.tv_money,item.getWage_min()/1000+"K"+"-"+item.getWage_max()/1000+"K");
+                if (item.getWage_face()==0) {
+                    helper.setText(R.id.tv_money, "" + item.getWage_min() / 1000 + "K" + "-" + item.getWage_max() / 1000 + "K");
+                }else {
+                    helper.setText(R.id.tv_money,"面议");
+                }
                 helper.setText(R.id.tv_class,item.getEducation()+"/"+item.getCity());
                 helper.setText(R.id.tv_name_co,item.getName());
                 helper.setText(R.id.tv_below,item.getJobtag());
                 helper.setText(R.id.tv_time,item.getCreate_time());
                 ImageView imageView = helper.getView(R.id.iv_logo);
                 Glide.with(mContext).load(item.getCom_logo()).placeholder(R.mipmap.zhaoshangyinhang).into(imageView);
+
+                if (item.getIs_delivery() == 0) {
+                    ((TextView)helper.getView(R.id.tv_tou)).setText("投递简历");
+                    helper.getView(R.id.tv_tou).setBackgroundResource(R.mipmap.toudi1);
+                } else {
+                    ((TextView)helper.getView(R.id.tv_tou)).setText("已投递");
+                    helper.getView(R.id.tv_tou).setBackgroundResource(R.color.text_gray);
+                }
 
                 helper.getConvertView().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -137,6 +149,7 @@ public class CollectActivity extends BaseActivity {
                                 public void onResponse(String response) {
                                     BaseEntity entity = gson.fromJson(response,BaseEntity.class);
                                     showToast(entity.getMsg());
+                                    initData();
                                 }
                             });
                         }

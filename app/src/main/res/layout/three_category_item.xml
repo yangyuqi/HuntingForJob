@@ -14,7 +14,6 @@
         android:background="@drawable/three_catrgory_bg"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:clickable="true"
         android:textColor="@drawable/three_category_text_color"
         android:paddingLeft="@dimen/space_15"
         android:id="@+id/tv_name"

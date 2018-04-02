@@ -10,7 +10,7 @@
         >
 
 
-        <ImageView
+        <com.youzheng.tongxiang.huntingjob.UI.Widget.CircleImageView
             android:id="@+id/iv_logo"
             android:layout_marginLeft="@dimen/space_20"
             android:layout_width="40dp"
@@ -51,6 +51,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_money"
                         android:layout_marginRight="@dimen/space_20"
                         android:textColor="@color/text_red"
                         android:layout_width="wrap_content"
@@ -60,6 +61,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_level_l"
                         android:textSize="@dimen/text_size_12"
                         android:textColor="@color/text_gray"
                         android:text="本科/上海"
@@ -94,6 +96,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_below"
                         android:textSize="@dimen/text_size_11"
                         android:textColor="@color/text_gray"
                         android:text="电子商务/软件开发"

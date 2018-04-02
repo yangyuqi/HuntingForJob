@@ -22,6 +22,8 @@ public class SharedPreferencesUtils {
     public static String AREAALL = "areaall";
     public static String from = "from";
 
+    public static String fiet = "frist";
+
     public static String attestationTipDate = "attestationTipDate";
 
     /**
